@@ -1,15 +1,12 @@
 package com.bishe.cloud.controller;
 
 import com.bishe.cloud.model.HostHolder;
-import com.bishe.cloud.model.ViewObject;
 import com.bishe.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by bishe.cloud on 2016/7/2.
@@ -24,8 +21,7 @@ public class HomeController {
 
 
     @RequestMapping(path = {"/", "/index"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String index(Model model,
-                        @RequestParam(value = "pop", defaultValue = "0") int pop) {
+    public String index(Model model,@RequestParam(value = "pop", defaultValue = "0") int pop) {
         model.addAttribute("pop", pop);
         return "home";
     }
