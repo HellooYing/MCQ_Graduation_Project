@@ -1,15 +1,20 @@
 package com.bishe.cloud.model;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @description: 边缘设备
  * @author: mayingying03
  * @date: 2020/2/6
  * @time: 7:24 下午
  */
+@Table(name = "pi")
 public class Pi {
     /**
      * 派id
      */
+    @Id
     private Long id;
 
     /**

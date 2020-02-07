@@ -3,10 +3,7 @@ package com.bishe.cloud.dao;
 import com.bishe.cloud.model.User;
 import org.apache.ibatis.annotations.*;
 
-/**
- * Created by bishe.cloud on 2016/7/2.
- */
-@Mapper
+
 public interface UserDAO {
     String TABLE_NAME = "user";
     String INSET_FIELDS = " name, password, salt, head_url ";

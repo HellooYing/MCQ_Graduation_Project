@@ -1,15 +1,20 @@
 package com.bishe.cloud.model;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @description: 传感器类型
  * @author: mayingying03
  * @date: 2020/2/6
  * @time: 6:48 下午
  */
+@Table(name = "sensor_type")
 public class SensorType {
     /**
      * 传感器类型枚举编号
      */
+    @Id
     private Integer sensor_type;
 
     /**

@@ -1,5 +1,7 @@
 package com.bishe.cloud.model;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -8,7 +10,9 @@ import java.util.Date;
  * @date: 2020/2/6
  * @time: 6:56 下午
  */
+@Table(name = "sensor_data_record")
 public class SensorDataRecord {
+    @Id
     private Long id;
 
     /**

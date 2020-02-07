@@ -1,15 +1,20 @@
 package com.bishe.cloud.model;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @description:响应外设
  * @author: mayingying03
  * @date: 2020/2/6
  * @time: 7:05 下午
  */
+@Table(name = "response_device")
 public class ResponseDevice {
     /**
      * 响应外设id
      */
+    @Id
     private Long id;
 
     /**

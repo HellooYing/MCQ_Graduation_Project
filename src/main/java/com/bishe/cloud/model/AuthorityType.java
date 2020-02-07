@@ -1,15 +1,20 @@
 package com.bishe.cloud.model;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @description:权限枚举
  * @author: mayingying03
  * @date: 2020/2/6
  * @time: 7:26 下午
  */
+@Table(name="authority_type")
 public class AuthorityType {
     /**
      * 权限类型枚举编号
      */
+    @Id
     private Integer authority_type;
 
     /**
