@@ -1,8 +1,13 @@
 package com.bishe.cloud.model;
 
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class User {
-    private int id;
+    @Id
+    @GeneratedValue(generator = "JDBC")
+    private Integer id;
     private String name;
     private String password;
     private String salt;
@@ -27,6 +32,14 @@ public class User {
         this.password = "";
         this.salt = "";
         this.headUrl = "";
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -59,13 +72,5 @@ public class User {
 
     public void setHeadUrl(String headUrl) {
         this.headUrl = headUrl;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

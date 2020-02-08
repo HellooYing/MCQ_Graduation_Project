@@ -4,33 +4,25 @@ import java.util.Date;
 
 
 public class LoginTicket {
-    private int id;
-    private int userId;
+    private Integer id;
+    private Integer userId;
     private Date expired;
-    private int status;// 0有效，1无效
+    private Integer status;// 0有效，1无效
     private String ticket;
 
-    public String getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(String ticket) {
-        this.ticket = ticket;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -42,11 +34,48 @@ public class LoginTicket {
         this.expired = expired;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
+    }
+
+    public LoginTicket(Integer id, Integer userId, Date expired, Integer status, String ticket) {
+        this.id = id;
+        this.userId = userId;
+        this.expired = expired;
+        this.status = status;
+        this.ticket = ticket;
+    }
+
+    public LoginTicket() {
+    }
+
+    public LoginTicket(Integer userId, Date expired, Integer status, String ticket) {
+        this.userId = userId;
+        this.expired = expired;
+        this.status = status;
+        this.ticket = ticket;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginTicket{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", expired=" + expired +
+                ", status=" + status +
+                ", ticket='" + ticket + '\'' +
+                '}';
     }
 }

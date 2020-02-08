@@ -45,4 +45,12 @@ public class AuthorityType {
         this.authority_type = authority_type;
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "AuthorityType{" +
+                "authority_type=" + authority_type +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

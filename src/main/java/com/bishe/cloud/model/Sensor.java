@@ -107,4 +107,16 @@ public class Sensor {
         this.location = location;
         this.extension = extension;
     }
+
+    @Override
+    public String toString() {
+        return "Sensor{" +
+                "id=" + id +
+                ", sensor_type=" + sensor_type +
+                ", warehouse_id=" + warehouse_id +
+                ", pi_id=" + pi_id +
+                ", location='" + location + '\'' +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 }

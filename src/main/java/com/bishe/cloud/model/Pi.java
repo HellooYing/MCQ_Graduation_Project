@@ -78,4 +78,14 @@ public class Pi {
         this.location = location;
         this.extension = extension;
     }
+
+    @Override
+    public String toString() {
+        return "Pi{" +
+                "id=" + id +
+                ", warehouse_id=" + warehouse_id +
+                ", location='" + location + '\'' +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 }

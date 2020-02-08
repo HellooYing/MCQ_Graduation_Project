@@ -80,4 +80,14 @@ public class SensorType {
     public void setExtension(String extension) {
         this.extension = extension;
     }
+
+    @Override
+    public String toString() {
+        return "SensorType{" +
+                "sensor_type=" + sensor_type +
+                ", name='" + name + '\'' +
+                ", value_type=" + value_type +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 }

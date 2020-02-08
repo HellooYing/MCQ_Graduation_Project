@@ -109,4 +109,16 @@ public class ResponseRecord {
         this.create_time = create_time;
         this.extension = extension;
     }
+
+    @Override
+    public String toString() {
+        return "ResponseRecord{" +
+                "id=" + id +
+                ", warehouse_id=" + warehouse_id +
+                ", response_device_type=" + response_device_type +
+                ", response_device_id=" + response_device_id +
+                ", create_time=" + create_time +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 }

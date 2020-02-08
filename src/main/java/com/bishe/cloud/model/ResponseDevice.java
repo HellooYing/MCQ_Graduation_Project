@@ -108,4 +108,16 @@ public class ResponseDevice {
         this.location = location;
         this.extension = extension;
     }
+
+    @Override
+    public String toString() {
+        return "ResponseDevice{" +
+                "id=" + id +
+                ", response_device_type=" + response_device_type +
+                ", warehouse_id=" + warehouse_id +
+                ", pi_id=" + pi_id +
+                ", location='" + location + '\'' +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 }

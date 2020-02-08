@@ -2,9 +2,10 @@ package com.bishe.cloud.dao;
 
 import com.bishe.cloud.model.User;
 import org.apache.ibatis.annotations.*;
+import tk.mybatis.mapper.common.Mapper;
 
 
-public interface UserDAO {
+public interface UserDAO extends Mapper<User> {
     String TABLE_NAME = "user";
     String INSET_FIELDS = " name, password, salt, head_url ";
     String SELECT_FIELDS = " id, name, password, salt, head_url";

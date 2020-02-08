@@ -63,4 +63,13 @@ public class ResponseDeviceType {
         this.name = name;
         this.extension = extension;
     }
+
+    @Override
+    public String toString() {
+        return "ResponseDeviceType{" +
+                "response_device_type=" + response_device_type +
+                ", name='" + name + '\'' +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 }

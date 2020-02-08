@@ -150,4 +150,19 @@ public class Monitor {
         this.create_time = create_time;
         this.extension = extension;
     }
+
+    @Override
+    public String toString() {
+        return "Monitor{" +
+                "id=" + id +
+                ", sensor_id=" + sensor_id +
+                ", response_device_list='" + response_device_list + '\'' +
+                ", time='" + time + '\'' +
+                ", emails='" + emails + '\'' +
+                ", sync_num=" + sync_num +
+                ", using=" + using +
+                ", create_time=" + create_time +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 }

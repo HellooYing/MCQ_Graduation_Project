@@ -2,10 +2,10 @@ package com.bishe.cloud.dao;
 
 import com.bishe.cloud.model.LoginTicket;
 import org.apache.ibatis.annotations.*;
+import tk.mybatis.mapper.common.Mapper;
 
 
-
-public interface LoginTicketDAO {
+public interface LoginTicketDAO extends Mapper<LoginTicket> {
     String TABLE_NAME = "login_ticket";
     String INSERT_FIELDS = " user_id, expired, status, ticket ";
     String SELECT_FIELDS = " id, " + INSERT_FIELDS;

@@ -137,4 +137,17 @@ public class SensorDataRecord {
         this.create_time = create_time;
         this.extension = extension;
     }
+
+    @Override
+    public String toString() {
+        return "SensorDataRecord{" +
+                "id=" + id +
+                ", warehouse_id=" + warehouse_id +
+                ", sensor_type=" + sensor_type +
+                ", sensor_id=" + sensor_id +
+                ", value='" + value + '\'' +
+                ", create_time=" + create_time +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 }
