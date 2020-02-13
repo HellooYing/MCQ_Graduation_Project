@@ -7,6 +7,7 @@ import com.bishe.cloud.service.SensorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +30,57 @@ public class DeviceController {
     PiService piService;
     @Resource
     SensorService sensorService;
+
+    @RequestMapping(path = {"/sensor"}, method = {RequestMethod.GET,RequestMethod.POST})
+    public String sensor(Model model) {
+        try {
+            model.addAttribute("sensors",sensorService.getAllSensor());
+        } catch (Exception e) {
+            logger.error("显示全部传感器信息错误" + e.getMessage());
+        }
+        return "home";
+    }
+
+    @RequestMapping(path = {"/sensorType"}, method = {RequestMethod.GET,RequestMethod.POST})
+    public String sensorType(Model model) {
+        try {
+            model.addAttribute("sensorTypes",sensorService.getAllType());
+        } catch (Exception e) {
+            logger.error("显示全部传感器类型信息错误" + e.getMessage());
+        }
+        return "home";
+    }
+
+    @RequestMapping(path = {"/responseDevice"}, method = {RequestMethod.GET,RequestMethod.POST})
+    public String responseDevice(Model model) {
+        try {
+            model.addAttribute("responseDevices",responseService.getAllDevice());
+        } catch (Exception e) {
+            logger.error("显示全部响应外设信息错误" + e.getMessage());
+        }
+        return "home";
+    }
+
+    @RequestMapping(path = {"/responseDeviceType"}, method = {RequestMethod.GET,RequestMethod.POST})
+    public String responseDeviceType(Model model) {
+        try {
+            model.addAttribute("responseDeviceTypes",responseService.getAllType());
+        } catch (Exception e) {
+            logger.error("显示全部响应外设类型信息错误" + e.getMessage());
+        }
+        return "home";
+    }
+
+    @RequestMapping(path = {"/pi"}, method = {RequestMethod.GET,RequestMethod.POST})
+    public String pi(Model model) {
+        try {
+            //TODO 权限验证，暂时不写
+            model.addAttribute("pis",piService.getAll());
+        } catch (Exception e) {
+            logger.error("显示全部边缘设备信息错误" + e.getMessage());
+        }
+        return "home";
+    }
 
     @RequestMapping(path = {"/addPi"}, method = {RequestMethod.POST})
     public String addPi(@RequestParam("warehouseId") long warehouseId,

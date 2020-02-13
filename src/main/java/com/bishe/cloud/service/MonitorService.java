@@ -2,6 +2,8 @@ package com.bishe.cloud.service;
 
 import com.bishe.cloud.model.Monitor;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: mayingying03
@@ -16,4 +18,6 @@ public interface MonitorService {
     int deleteMonitor(long id);
 
     Monitor getMonitor(long id);
+
+    List<Monitor> getAll();
 }

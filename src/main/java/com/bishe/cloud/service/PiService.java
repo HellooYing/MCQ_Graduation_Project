@@ -2,6 +2,8 @@ package com.bishe.cloud.service;
 
 import com.bishe.cloud.model.Pi;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: mayingying03
@@ -16,4 +18,6 @@ public interface PiService {
     int updatePi(Pi pi);
 
     Pi getPi(long id);
+
+    List<Pi> getAll();
 }

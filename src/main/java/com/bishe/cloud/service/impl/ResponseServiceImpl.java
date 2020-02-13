@@ -82,4 +82,19 @@ public class ResponseServiceImpl implements ResponseService {
     public int renameResponseDeviceType(int responseDeviceType, String name) {
         return responseDeviceTypeDAO.updateByPrimaryKeySelective(new ResponseDeviceType(responseDeviceType,name));
     }
+
+    @Override
+    public List<ResponseDeviceType> getAllType() {
+        return responseDeviceTypeDAO.selectAll();
+    }
+
+    @Override
+    public List<ResponseDevice> getAllDevice() {
+        return responseDeviceDAO.selectAll();
+    }
+
+    @Override
+    public List<ResponseRecord> getAllRecord() {
+        return responseRecordDAO.selectAll();
+    }
 }

@@ -143,3 +143,5 @@ create table `monitor`
     primary key (`id`)
 ) engine = innodb
   default charset = utf8;
+
+insert into authority_type (name) values('查看全部数据');

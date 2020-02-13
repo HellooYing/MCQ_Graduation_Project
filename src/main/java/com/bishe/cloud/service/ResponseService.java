@@ -91,4 +91,10 @@ public interface ResponseService {
      * @return
      */
     int renameResponseDeviceType(int responseDeviceType,String name);
+
+    List<ResponseDeviceType> getAllType();
+
+    List<ResponseDevice> getAllDevice();
+
+    List<ResponseRecord> getAllRecord();
 }

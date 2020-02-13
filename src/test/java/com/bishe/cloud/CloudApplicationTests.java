@@ -59,22 +59,22 @@ public class CloudApplicationTests {
 
         System.out.println(userDAO.select(user));
 
-        // User user1=new User("myy1");
-        // user1.setHeadUrl("http://images.bishe.cloud.com/head/622t.png");
-        // user1.setSalt("9bfb6");
-        // user1.setPassword("D5B8CEE3D27223E12D8ACD44553FC9E0");
-        // userDAO.insertSelective(user1);
-        // System.out.println(user1.getId());
-        // user1.setId(null);
-        // user1.setName("myy2");
-        // userDAO.insert(user1);
-        // System.out.println(user1.getId());
+         User user1=new User("myy1");
+         user1.setHeadUrl("http://images.bishe.cloud.com/head/622t.png");
+         user1.setSalt("9bfb6");
+         user1.setPassword("D5B8CEE3D27223E12D8ACD44553FC9E0");
+         userDAO.insertSelective(user1);
+         System.out.println(user1.getId());
+         user1.setId(null);
+         user1.setName("myy2");
+         userDAO.insert(user1);
+         System.out.println(user1.getId());
 
-        User user1 = new User("myy1");
-        user1.setId(6);
-        System.out.println(userDAO.select(user1));
-        user1.setId(5);
-        System.out.println(userDAO.select(user1));
+        User user2 = new User("myy1");
+        user2.setId(user1.getId());
+        System.out.println(userDAO.select(user2));
+        user2.setId(user1.getId()+10086);
+        System.out.println(userDAO.select(user2));
     }
 
 	@Test

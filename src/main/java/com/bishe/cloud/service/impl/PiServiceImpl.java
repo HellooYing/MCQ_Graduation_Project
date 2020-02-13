@@ -6,6 +6,7 @@ import com.bishe.cloud.service.PiService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @description:
@@ -37,4 +38,10 @@ public class PiServiceImpl implements PiService {
     public Pi getPi(long id) {
         return piDAO.selectByPrimaryKey(new Pi(id));
     }
+
+    @Override
+    public List<Pi> getAll() {
+        return piDAO.selectAll();
+    }
+
 }

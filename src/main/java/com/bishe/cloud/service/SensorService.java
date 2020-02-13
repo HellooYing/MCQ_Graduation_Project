@@ -4,6 +4,8 @@ import com.bishe.cloud.model.Sensor;
 import com.bishe.cloud.model.SensorDataRecord;
 import com.bishe.cloud.model.SensorType;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: mayingying03
@@ -37,4 +39,10 @@ public interface SensorService {
     int updateSensorDataRecordById(SensorDataRecord sensorDataRecord);
 
     SensorDataRecord getSensorDataRecord(long id);
+
+    List<SensorType> getAllType();
+
+    List<Sensor> getAllSensor();
+
+    List<SensorDataRecord> getAllRecord();
 }

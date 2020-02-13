@@ -10,6 +10,7 @@ import com.bishe.cloud.service.SensorService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @description: 传感器相关服务
@@ -84,5 +85,20 @@ public class SensorServiceImpl implements SensorService{
     @Override
     public SensorDataRecord getSensorDataRecord(long id) {
         return sensorDataRecordDAO.selectByPrimaryKey(new SensorDataRecord(id));
+    }
+
+    @Override
+    public List<SensorType> getAllType() {
+        return sensorTypeDAO.selectAll();
+    }
+
+    @Override
+    public List<Sensor> getAllSensor() {
+        return sensorDAO.selectAll();
+    }
+
+    @Override
+    public List<SensorDataRecord> getAllRecord() {
+        return sensorDataRecordDAO.selectAll();
     }
 }

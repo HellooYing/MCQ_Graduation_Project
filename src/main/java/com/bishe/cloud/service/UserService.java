@@ -47,5 +47,8 @@ public interface UserService {
      * @return
      */
     boolean userHasAuthority(int userId,int authorityType);
-    
+
+    List<AuthorityType> getAllType();
+
+    List<UserAuthority> getAllUserAuthority();
 }

@@ -6,6 +6,7 @@ import com.bishe.cloud.service.MonitorService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @description:
@@ -36,5 +37,10 @@ public class MonitorServiceImpl implements MonitorService {
     @Override
     public Monitor getMonitor(long id) {
         return monitorDAO.selectByPrimaryKey(new Monitor(id));
+    }
+
+    @Override
+    public List<Monitor> getAll() {
+        return monitorDAO.selectAll();
     }
 }

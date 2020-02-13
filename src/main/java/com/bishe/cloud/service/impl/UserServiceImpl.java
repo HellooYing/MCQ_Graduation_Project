@@ -150,6 +150,16 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public List<AuthorityType> getAllType() {
+        return authorityTypeDAO.selectAll();
+    }
+
+    @Override
+    public List<UserAuthority> getAllUserAuthority() {
+        return userAuthorityDAO.selectAll();
+    }
+
     private String addLoginTicket(int userId) {
         LoginTicket ticket = new LoginTicket();
         ticket.setUserId(userId);
