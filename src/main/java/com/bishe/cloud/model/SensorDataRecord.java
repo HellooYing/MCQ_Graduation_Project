@@ -18,7 +18,7 @@ public class SensorDataRecord {
     /**
      * 仓库id（在哪个仓库测量的记录）
      */
-    private Long warehouse_id;
+    private Long warehouseId;
 
     /**
      * 传感器类型：
@@ -30,12 +30,12 @@ public class SensorDataRecord {
      * 5 声音，
      * 6 烟雾
      */
-    private Integer sensor_type;
+    private Integer sensorType;
 
     /**
      * 传感器id
      */
-    private Long sensor_id;
+    private Long sensorId;
 
     /**
      * 记录值
@@ -45,12 +45,25 @@ public class SensorDataRecord {
     /**
      * 记录时间
      */
-    private Date create_time;
+    private Date createTime;
 
     /**
      * 扩展字段
      */
     private String extension;
+
+    @Override
+    public String toString() {
+        return "SensorDataRecord{" +
+                "id=" + id +
+                ", warehouseId=" + warehouseId +
+                ", sensorType=" + sensorType +
+                ", sensorId=" + sensorId +
+                ", value='" + value + '\'' +
+                ", createTime=" + createTime +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 
     public Long getId() {
         return id;
@@ -60,28 +73,28 @@ public class SensorDataRecord {
         this.id = id;
     }
 
-    public Long getWarehouse_id() {
-        return warehouse_id;
+    public Long getWarehouseId() {
+        return warehouseId;
     }
 
-    public void setWarehouse_id(Long warehouse_id) {
-        this.warehouse_id = warehouse_id;
+    public void setWarehouseId(Long warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
-    public Integer getSensor_type() {
-        return sensor_type;
+    public Integer getSensorType() {
+        return sensorType;
     }
 
-    public void setSensor_type(Integer sensor_type) {
-        this.sensor_type = sensor_type;
+    public void setSensorType(Integer sensorType) {
+        this.sensorType = sensorType;
     }
 
-    public Long getSensor_id() {
-        return sensor_id;
+    public Long getSensorId() {
+        return sensorId;
     }
 
-    public void setSensor_id(Long sensor_id) {
-        this.sensor_id = sensor_id;
+    public void setSensorId(Long sensorId) {
+        this.sensorId = sensorId;
     }
 
     public String getValue() {
@@ -92,12 +105,12 @@ public class SensorDataRecord {
         this.value = value;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getExtension() {
@@ -108,46 +121,28 @@ public class SensorDataRecord {
         this.extension = extension;
     }
 
-    public SensorDataRecord(Long warehouse_id, Integer sensor_type, Long sensor_id, String value, Date create_time) {
-        this.warehouse_id = warehouse_id;
-        this.sensor_type = sensor_type;
-        this.sensor_id = sensor_id;
+    public SensorDataRecord(Long warehouseId, Integer sensorType, Long sensorId, String value, Date createTime) {
+        this.warehouseId = warehouseId;
+        this.sensorType = sensorType;
+        this.sensorId = sensorId;
         this.value = value;
-        this.create_time = create_time;
+        this.createTime = createTime;
     }
 
     public SensorDataRecord() {
     }
 
-    public SensorDataRecord(Long warehouse_id, Integer sensor_type, Long sensor_id, String value, Date create_time, String extension) {
-        this.warehouse_id = warehouse_id;
-        this.sensor_type = sensor_type;
-        this.sensor_id = sensor_id;
-        this.value = value;
-        this.create_time = create_time;
-        this.extension = extension;
-    }
-
-    public SensorDataRecord(Long id, Long warehouse_id, Integer sensor_type, Long sensor_id, String value, Date create_time, String extension) {
+    public SensorDataRecord(Long id) {
         this.id = id;
-        this.warehouse_id = warehouse_id;
-        this.sensor_type = sensor_type;
-        this.sensor_id = sensor_id;
-        this.value = value;
-        this.create_time = create_time;
-        this.extension = extension;
     }
 
-    @Override
-    public String toString() {
-        return "SensorDataRecord{" +
-                "id=" + id +
-                ", warehouse_id=" + warehouse_id +
-                ", sensor_type=" + sensor_type +
-                ", sensor_id=" + sensor_id +
-                ", value='" + value + '\'' +
-                ", create_time=" + create_time +
-                ", extension='" + extension + '\'' +
-                '}';
+    public SensorDataRecord(Long id, Long warehouseId, Integer sensorType, Long sensorId, String value, Date createTime, String extension) {
+        this.id = id;
+        this.warehouseId = warehouseId;
+        this.sensorType = sensorType;
+        this.sensorId = sensorId;
+        this.value = value;
+        this.createTime = createTime;
+        this.extension = extension;
     }
 }

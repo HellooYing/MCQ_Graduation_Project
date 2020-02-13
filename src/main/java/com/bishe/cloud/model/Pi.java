@@ -20,7 +20,7 @@ public class Pi {
     /**
      * 归属仓库id
      */
-    private Long warehouse_id;
+    private Long warehouseId;
 
     /**
      * 树莓派坐标
@@ -40,12 +40,12 @@ public class Pi {
         this.id = id;
     }
 
-    public Long getWarehouse_id() {
-        return warehouse_id;
+    public Long getWarehouseId() {
+        return warehouseId;
     }
 
-    public void setWarehouse_id(Long warehouse_id) {
-        this.warehouse_id = warehouse_id;
+    public void setWarehouseId(Long warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
     public String getLocation() {
@@ -67,23 +67,26 @@ public class Pi {
     public Pi() {
     }
 
-    public Pi(Long warehouse_id, String location) {
-        this.warehouse_id = warehouse_id;
+    public Pi(Long id) {
+        this.id = id;
+    }
+
+    public Pi(Long warehouseId, String location) {
+        this.warehouseId = warehouseId;
         this.location = location;
     }
 
-    public Pi(Long id, Long warehouse_id, String location, String extension) {
+    public Pi(Long id, Long warehouseId, String location) {
         this.id = id;
-        this.warehouse_id = warehouse_id;
+        this.warehouseId = warehouseId;
         this.location = location;
-        this.extension = extension;
     }
 
     @Override
     public String toString() {
         return "Pi{" +
                 "id=" + id +
-                ", warehouse_id=" + warehouse_id +
+                ", warehouseId=" + warehouseId +
                 ", location='" + location + '\'' +
                 ", extension='" + extension + '\'' +
                 '}';

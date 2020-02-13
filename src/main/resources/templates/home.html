@@ -1,17 +1,91 @@
-#parse("header.html")
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-    <div id="main">
-        <div class="container" id="daily">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>校园头条</title>
+    <meta name="viewport"
+          content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
+    <link rel="stylesheet" type="text/css" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/styles/font-awesome.min.css">
+
+    <link rel="stylesheet" media="all" href="/styles/style.css">
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/main/base/base.js"></script>
+    <script type="text/javascript" src="/scripts/main/base/util.js"></script>
+    <script type="text/javascript" src="/scripts/main/base/event.js"></script>
+    <script type="text/javascript" src="/scripts/main/base/upload.js"></script>
+    <script type="text/javascript" src="/scripts/main/component/component.js"></script>
+    <script type="text/javascript" src="/scripts/main/component/popup.js"></script>
+    <script type="text/javascript" src="/scripts/main/component/popupLogin.js"></script>
+    <script type="text/javascript" src="/scripts/main/component/upload.js"></script>
+    <script type="text/javascript" src="/scripts/main/component/popupUpload.js"></script>
+    <script type="text/javascript" src="/scripts/main/util/action.js"></script>
+    40.105971,116.214927
+    116.15587234431587,40.09834881291849;116.15973472562473,40.09773164947584;116.16282463040989,40.097665993524956;116.17089271512668,40.10134262921436;116.17582797971409,40.103837376002176;116.17900371518772,40.097895789075814;116.17958307233494,40.09453084813907;116.18403553929966,40.09527771525036;116.19089662995975,40.10270900679578;116.19647294250171,40.10580069380905;116.20162010160129,40.10695568084314;116.20312213864963,40.10802243652664;116.20318651166599,40.109671772000205;116.2040340897147,40.11082464195366;116.20775699582737,40.11135388887529;116.210932731301,40.11141953161726;116.20803594556492,40.11061540366268;116.20505332914036,40.10990973252344;116.20449542966526,40.10797320201723;116.20614767041843,40.10639767889861;116.20671629872959,40.103312173754276;116.20861530271213,40.10272131637898;116.21603965726536,40.10265566524277;116.21809959378879,40.10344347469636;116.21895790067356,40.10357477538504;116.22719764676731,40.09976695253108;116.23311996427219,40.10167089059713;116.23766899076145,40.108170139841214;116.23852729764621,40.108038848021906;116.24588727942864,40.10475318727197;116.24951362601678,40.10557379662035;116.24972820273797,40.105770741391;116.24455690375726,40.109725928155505;116.2434840201513,40.11074340788991;116.24219655982415,40.11519060032065;116.23981475821893,40.123936443996314;116.23835563651483,40.12905544024691;116.2365317343847,40.13168041699723;116.23301267615716,40.136634784344395;116.2268972396032,40.14296666178121;116.22299194327752,40.147116510020254;116.21846437446038,40.152364966826774;116.21616840354363,40.15889216907477;116.21395826331536,40.164861221833036;116.21138334266107,40.17107569434668;116.20857238761346,40.17719122917658;116.20799303046624,40.178584772609774;116.20855092994134,40.1818799791048;116.20970964423577,40.18884692856468;116.21039628974358,40.19322344613874;116.20786428443353,40.202106744355135;116.20556831351678,40.20980903124139;116.20443105689446,40.214118652437556;116.20524644843499,40.217723448255995;116.20700597754876,40.22493246458174;116.20863676062982,40.22775032605601;116.20898008338372,40.23135439661751;116.21181249610345,40.23287787786489;116.2141084670202,40.23949561363821;116.21550321570794,40.24308268027822;116.21279954902093,40.243426635586374;116.20554685584466,40.243426635586374;116.19820833197991,40.24401626919171;116.1974143981115,40.243836103912734;116.1953973769323,40.24399989054979;116.1579322808393,40.244864678473114;116.12840652400337,40.24434056653516;116.11295700007759,40.242113045528114;116.11845016414009,40.22481450608355;116.11896514827095,40.18994190507079;116.12960815331462,40.17252511118543;116.15055084097548,40.17189550537134;116.16325378287002,40.156153446779996;116.15295410025283,40.130696064849246
+</head>
+<body class="welcome_index">
+
+<header class="navbar navbar-default navbar-static-top bs-docs-nav" id="top" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+                    data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a href="/" class="navbar-brand logo">
+                <h1>校园头条资讯</h1>
+                <h3>你关心的才是头条</h3>
+            </a>
         </div>
+
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+
+            <ul th:if="${user}" class="nav navbar-nav navbar-right">
+                <li class="js-share"><a href="javascript:void(0);">分享</a></li>
+                <li class=""><a href="/msg/list">站内信</a></li>
+                <li class=""><a th:text="${user.name}" href="/user/${user.id}/"></a></li>
+                <li class=""><a href="/logout/">退出</a></li>
+            </ul>
+            <ul th:unless="${user}" class="nav navbar-nav navbar-right">
+                <li class="js-login"><a href="javascript:void(0);">登陆</a></li>
+            </ul>
+
+        </nav>
+    </div>
+</header>
+
+
+<div id="main">
+    <div class="container" id="daily">
 
     </div>
 
+</div>
 
-#if ($pop)
-<script>
+
+
+<script th:if="${pop!=null}">
     window.loginpop = $!{pop};
 </script>
-#end
+
 <script type="text/javascript" src="/scripts/main/site/home.js"></script>
-#parse("footer.html")
+
+<footer>
+    <div class="container">
+        <p class="text-center">
+            东北大学-计算机1606
+        </p>
+        <p class="text-center">© 校园头条</p>
+    </div>
+
+</footer>
+
+
+</body>
+</html>

@@ -15,7 +15,7 @@ public class SensorType {
      * 传感器类型枚举编号
      */
     @Id
-    private Integer sensor_type;
+    private Integer sensorType;
 
     /**
      * 传感器名
@@ -27,7 +27,7 @@ public class SensorType {
      * 0 布尔类型 如是否存在火焰，
      * 1 数值类型 如温度
      */
-    private Integer value_type;
+    private Integer valueType;
 
     /**
      * 扩展字段
@@ -37,24 +37,22 @@ public class SensorType {
     public SensorType() {
     }
 
-    public SensorType(Integer sensor_type, String name, Integer value_type, String extension) {
-        this.sensor_type = sensor_type;
-        this.name = name;
-        this.value_type = value_type;
-        this.extension = extension;
+    @Override
+    public String toString() {
+        return "SensorType{" +
+                "sensorType=" + sensorType +
+                ", name='" + name + '\'' +
+                ", valueType=" + valueType +
+                ", extension='" + extension + '\'' +
+                '}';
     }
 
-    public SensorType(String name, Integer value_type) {
-        this.name = name;
-        this.value_type = value_type;
+    public Integer getSensorType() {
+        return sensorType;
     }
 
-    public Integer getSensor_type() {
-        return sensor_type;
-    }
-
-    public void setSensor_type(Integer sensor_type) {
-        this.sensor_type = sensor_type;
+    public void setSensorType(Integer sensorType) {
+        this.sensorType = sensorType;
     }
 
     public String getName() {
@@ -65,12 +63,12 @@ public class SensorType {
         this.name = name;
     }
 
-    public Integer getValue_type() {
-        return value_type;
+    public Integer getValueType() {
+        return valueType;
     }
 
-    public void setValue_type(Integer value_type) {
-        this.value_type = value_type;
+    public void setValueType(Integer valueType) {
+        this.valueType = valueType;
     }
 
     public String getExtension() {
@@ -81,13 +79,22 @@ public class SensorType {
         this.extension = extension;
     }
 
-    @Override
-    public String toString() {
-        return "SensorType{" +
-                "sensor_type=" + sensor_type +
-                ", name='" + name + '\'' +
-                ", value_type=" + value_type +
-                ", extension='" + extension + '\'' +
-                '}';
+    public SensorType(String name, Integer valueType) {
+        this.name = name;
+        this.valueType = valueType;
+    }
+
+    public SensorType(Integer sensorType) {
+        this.sensorType = sensorType;
+    }
+
+    public SensorType(String name) {
+        this.name = name;
+    }
+
+    public SensorType(Integer sensorType, String name, Integer valueType) {
+        this.sensorType = sensorType;
+        this.name = name;
+        this.valueType = valueType;
     }
 }

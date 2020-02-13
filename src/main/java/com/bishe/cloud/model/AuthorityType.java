@@ -15,19 +15,32 @@ public class AuthorityType {
      * 权限类型枚举编号
      */
     @Id
-    private Integer authority_type;
+    private Integer authorityType;
 
     /**
      * 权限名称
      */
     private String name;
 
-    public Integer getAuthority_type() {
-        return authority_type;
+    public AuthorityType(Integer authorityType, String name) {
+        this.authorityType = authorityType;
+        this.name = name;
     }
 
-    public void setAuthority_type(Integer authority_type) {
-        this.authority_type = authority_type;
+    @Override
+    public String toString() {
+        return "AuthorityType{" +
+                "authorityType=" + authorityType +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public Integer getauthorityType() {
+        return authorityType;
+    }
+
+    public void setauthorityType(Integer authorityType) {
+        this.authorityType = authorityType;
     }
 
     public String getName() {
@@ -41,16 +54,7 @@ public class AuthorityType {
     public AuthorityType() {
     }
 
-    public AuthorityType(Integer authority_type, String name) {
-        this.authority_type = authority_type;
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "AuthorityType{" +
-                "authority_type=" + authority_type +
-                ", name='" + name + '\'' +
-                '}';
+    public AuthorityType(Integer authorityType) {
+        this.authorityType = authorityType;
     }
 }

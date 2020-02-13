@@ -1,6 +1,7 @@
 package com.bishe.cloud;
 
 import com.bishe.cloud.dao.PiDAO;
+import com.bishe.cloud.dao.UserAuthorityDAO;
 import com.bishe.cloud.dao.UserDAO;
 import com.bishe.cloud.model.User;
 import org.junit.Test;
@@ -11,18 +12,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.annotation.Resource;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = CloudApplication.class)
 @WebAppConfiguration
 public class CloudApplicationTests {
-	@Autowired
+	@Resource
 	private PiDAO piDAO;
-	@Autowired
+	@Resource
 	private UserDAO userDAO;
+	@Resource
+	UserAuthorityDAO userAuthorityDAO;
+
+
 	@Test
 	public void contextLoads() {
-
+		System.out.println(userAuthorityDAO.selectCountByUserIdAndAuthority(1,1));
 	}
 
 	@Test

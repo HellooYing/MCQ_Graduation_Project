@@ -68,6 +68,10 @@ public class LoginTicket {
         this.ticket = ticket;
     }
 
+    public LoginTicket(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "LoginTicket{" +

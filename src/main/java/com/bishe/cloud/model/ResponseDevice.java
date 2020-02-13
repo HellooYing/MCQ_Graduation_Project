@@ -20,17 +20,17 @@ public class ResponseDevice {
     /**
      * 响应外设类型枚举编号
      */
-    private Integer response_device_type;
+    private Integer responseDeviceType;
 
     /**
      * 归属仓库id
      */
-    private Long warehouse_id;
+    private Long warehouseId;
 
     /**
      * 树莓派id
      */
-    private Long pi_id;
+    private Long piId;
 
    /**
      * 响应外设坐标
@@ -50,28 +50,28 @@ public class ResponseDevice {
         this.id = id;
     }
 
-    public Integer getResponse_device_type() {
-        return response_device_type;
+    public Integer getResponseDeviceType() {
+        return responseDeviceType;
     }
 
-    public void setResponse_device_type(Integer response_device_type) {
-        this.response_device_type = response_device_type;
+    public void setResponseDeviceType(Integer responseDeviceType) {
+        this.responseDeviceType = responseDeviceType;
     }
 
-    public Long getWarehouse_id() {
-        return warehouse_id;
+    public Long getWarehouseId() {
+        return warehouseId;
     }
 
-    public void setWarehouse_id(Long warehouse_id) {
-        this.warehouse_id = warehouse_id;
+    public void setWarehouseId(Long warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
-    public Long getPi_id() {
-        return pi_id;
+    public Long getPiId() {
+        return piId;
     }
 
-    public void setPi_id(Long pi_id) {
-        this.pi_id = pi_id;
+    public void setPiId(Long piId) {
+        this.piId = piId;
     }
 
     public String getLocation() {
@@ -90,32 +90,35 @@ public class ResponseDevice {
         this.extension = extension;
     }
 
-    public ResponseDevice(Integer response_device_type, Long warehouse_id, Long pi_id, String location) {
-        this.response_device_type = response_device_type;
-        this.warehouse_id = warehouse_id;
-        this.pi_id = pi_id;
+    public ResponseDevice(Integer responseDeviceType, Long warehouseId, Long piId, String location) {
+        this.responseDeviceType = responseDeviceType;
+        this.warehouseId = warehouseId;
+        this.piId = piId;
         this.location = location;
     }
 
     public ResponseDevice() {
     }
 
-    public ResponseDevice(Long id, Integer response_device_type, Long warehouse_id, Long pi_id, String location, String extension) {
+    public ResponseDevice(Long id) {
         this.id = id;
-        this.response_device_type = response_device_type;
-        this.warehouse_id = warehouse_id;
-        this.pi_id = pi_id;
+    }
+
+    public ResponseDevice(Long id, Integer responseDeviceType, Long warehouseId, Long piId, String location) {
+        this.id = id;
+        this.responseDeviceType = responseDeviceType;
+        this.warehouseId = warehouseId;
+        this.piId = piId;
         this.location = location;
-        this.extension = extension;
     }
 
     @Override
     public String toString() {
         return "ResponseDevice{" +
                 "id=" + id +
-                ", response_device_type=" + response_device_type +
-                ", warehouse_id=" + warehouse_id +
-                ", pi_id=" + pi_id +
+                ", responseDeviceType=" + responseDeviceType +
+                ", warehouseId=" + warehouseId +
+                ", piId=" + piId +
                 ", location='" + location + '\'' +
                 ", extension='" + extension + '\'' +
                 '}';

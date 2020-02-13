@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
@@ -20,7 +21,7 @@ import java.util.Map;
 public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @Autowired
+    @Resource
     UserService userService;
 
     @RequestMapping(path = {"/reg/"}, method = {RequestMethod.GET, RequestMethod.POST})
@@ -56,9 +57,11 @@ public class LoginController {
                         @RequestParam(value = "rember", defaultValue = "0") int remember,
                         HttpServletResponse response) {
         try {
+            System.out.println(username);
             Map<String, Object> map = userService.login(username, password);
             if (map.containsKey("ticket")) {
                 addCookie(map, remember, response);
+                System.out.println("登录成功");
                 return ToutiaoUtil.getJSONString(0, "登录成功");
             } else {
                 return ToutiaoUtil.getJSONString(1, map);

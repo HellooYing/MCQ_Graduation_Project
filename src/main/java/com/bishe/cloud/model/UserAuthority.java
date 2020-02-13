@@ -17,19 +17,19 @@ public class UserAuthority {
     /**
      * 用户id
      */
-    private Long user_id;
+    private Long userId;
 
     /**
      * 权限类型
      */
-    private Integer authority_type;
+    private Integer authorityType;
 
     @Override
     public String toString() {
         return "UserAuthority{" +
                 "id=" + id +
-                ", user_id=" + user_id +
-                ", authority_type=" + authority_type +
+                ", userId=" + userId +
+                ", authorityType=" + authorityType +
                 '}';
     }
 
@@ -41,33 +41,37 @@ public class UserAuthority {
         this.id = id;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Integer getAuthority_type() {
-        return authority_type;
+    public Integer getAuthorityType() {
+        return authorityType;
     }
 
-    public void setAuthority_type(Integer authority_type) {
-        this.authority_type = authority_type;
+    public void setAuthorityType(Integer authorityType) {
+        this.authorityType = authorityType;
     }
 
-    public UserAuthority(Long user_id, Integer authority_type) {
-        this.user_id = user_id;
-        this.authority_type = authority_type;
+    public UserAuthority(Long userId, Integer authorityType) {
+        this.userId = userId;
+        this.authorityType = authorityType;
     }
 
     public UserAuthority() {
     }
 
-    public UserAuthority(Long id, Long user_id, Integer authority_type) {
+    public UserAuthority(Long id) {
         this.id = id;
-        this.user_id = user_id;
-        this.authority_type = authority_type;
+    }
+
+    public UserAuthority(Long id, Long userId, Integer authorityType) {
+        this.id = id;
+        this.userId = userId;
+        this.authorityType = authorityType;
     }
 }

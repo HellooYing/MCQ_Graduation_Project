@@ -18,7 +18,7 @@ public class ResponseRecord {
     /**
      * 仓库id（在哪个仓库响应）
      */
-    private Long warehouse_id;
+    private Long warehouseId;
 
     /**
      * 响应外设类型：
@@ -26,17 +26,17 @@ public class ResponseRecord {
      * 1 蜂鸣器，
      * 2 信号灯
      */
-    private Integer response_device_type;
+    private Integer responseDeviceType;
 
     /**
      * 设备id
      */
-    private Long response_device_id;
+    private Long responseDeviceId;
 
     /**
      * 响应时间
      */
-    private Date create_time;
+    private Date createTime;
 
     /**
      * 扩展字段
@@ -51,36 +51,36 @@ public class ResponseRecord {
         this.id = id;
     }
 
-    public Long getWarehouse_id() {
-        return warehouse_id;
+    public Long getWarehouseId() {
+        return warehouseId;
     }
 
-    public void setWarehouse_id(Long warehouse_id) {
-        this.warehouse_id = warehouse_id;
+    public void setWarehouseId(Long warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
-    public Integer getResponse_device_type() {
-        return response_device_type;
+    public Integer getResponseDeviceType() {
+        return responseDeviceType;
     }
 
-    public void setResponse_device_type(Integer response_device_type) {
-        this.response_device_type = response_device_type;
+    public void setResponseDeviceType(Integer responseDeviceType) {
+        this.responseDeviceType = responseDeviceType;
     }
 
-    public Long getResponse_device_id() {
-        return response_device_id;
+    public Long getResponseDeviceId() {
+        return responseDeviceId;
     }
 
-    public void setResponse_device_id(Long response_device_id) {
-        this.response_device_id = response_device_id;
+    public void setResponseDeviceId(Long responseDeviceId) {
+        this.responseDeviceId = responseDeviceId;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getExtension() {
@@ -94,19 +94,23 @@ public class ResponseRecord {
     public ResponseRecord() {
     }
 
-    public ResponseRecord(Long warehouse_id, Integer response_device_type, Long response_device_id, Date create_time) {
-        this.warehouse_id = warehouse_id;
-        this.response_device_type = response_device_type;
-        this.response_device_id = response_device_id;
-        this.create_time = create_time;
+    public ResponseRecord(Long id) {
+        this.id = id;
     }
 
-    public ResponseRecord(Long id, Long warehouse_id, Integer response_device_type, Long response_device_id, Date create_time, String extension) {
+    public ResponseRecord(Long warehouseId, Integer responseDeviceType, Long responseDeviceId, Date createTime) {
+        this.warehouseId = warehouseId;
+        this.responseDeviceType = responseDeviceType;
+        this.responseDeviceId = responseDeviceId;
+        this.createTime = createTime;
+    }
+
+    public ResponseRecord(Long id, Long warehouseId, Integer responseDeviceType, Long responseDeviceId, Date createTime, String extension) {
         this.id = id;
-        this.warehouse_id = warehouse_id;
-        this.response_device_type = response_device_type;
-        this.response_device_id = response_device_id;
-        this.create_time = create_time;
+        this.warehouseId = warehouseId;
+        this.responseDeviceType = responseDeviceType;
+        this.responseDeviceId = responseDeviceId;
+        this.createTime = createTime;
         this.extension = extension;
     }
 
@@ -114,10 +118,10 @@ public class ResponseRecord {
     public String toString() {
         return "ResponseRecord{" +
                 "id=" + id +
-                ", warehouse_id=" + warehouse_id +
-                ", response_device_type=" + response_device_type +
-                ", response_device_id=" + response_device_id +
-                ", create_time=" + create_time +
+                ", warehouseId=" + warehouseId +
+                ", responseDeviceType=" + responseDeviceType +
+                ", responseDeviceId=" + responseDeviceId +
+                ", createTime=" + createTime +
                 ", extension='" + extension + '\'' +
                 '}';
     }

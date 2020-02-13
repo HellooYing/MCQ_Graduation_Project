@@ -27,11 +27,12 @@ public class User {
     public User() {
 
     }
-    public User(String name) {
+
+    public User(String name, String password, String salt, String headUrl) {
         this.name = name;
-        this.password = "";
-        this.salt = "";
-        this.headUrl = "";
+        this.password = password;
+        this.salt = salt;
+        this.headUrl = headUrl;
     }
 
     public Integer getId() {

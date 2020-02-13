@@ -18,12 +18,12 @@ public class Monitor {
     /**
      * 传感器id
      */
-    private Long sensor_id;
+    private Long sensorId;
 
     /**
      * 响应设备列表
      */
-    private String response_device_list;
+    private String responseDeviceList;
 
     /**
      * 执行时间表达式
@@ -48,12 +48,27 @@ public class Monitor {
     /**
      * 创建计划时间
      */
-    private Date create_time;
+    private Date createTime;
 
     /**
      * 扩展字段
      */
     private String extension;
+
+    @Override
+    public String toString() {
+        return "Monitor{" +
+                "id=" + id +
+                ", sensorId=" + sensorId +
+                ", responseDeviceList='" + responseDeviceList + '\'' +
+                ", time='" + time + '\'' +
+                ", emails='" + emails + '\'' +
+                ", sync_num=" + sync_num +
+                ", using=" + using +
+                ", createTime=" + createTime +
+                ", extension='" + extension + '\'' +
+                '}';
+    }
 
     public Long getId() {
         return id;
@@ -63,20 +78,20 @@ public class Monitor {
         this.id = id;
     }
 
-    public Long getSensor_id() {
-        return sensor_id;
+    public Long getSensorId() {
+        return sensorId;
     }
 
-    public void setSensor_id(Long sensor_id) {
-        this.sensor_id = sensor_id;
+    public void setSensorId(Long sensorId) {
+        this.sensorId = sensorId;
     }
 
-    public String getResponse_device_list() {
-        return response_device_list;
+    public String getResponseDeviceList() {
+        return responseDeviceList;
     }
 
-    public void setResponse_device_list(String response_device_list) {
-        this.response_device_list = response_device_list;
+    public void setResponseDeviceList(String responseDeviceList) {
+        this.responseDeviceList = responseDeviceList;
     }
 
     public String getTime() {
@@ -111,12 +126,12 @@ public class Monitor {
         this.using = using;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getExtension() {
@@ -127,42 +142,32 @@ public class Monitor {
         this.extension = extension;
     }
 
-    public Monitor(Long sensor_id, String response_device_list, String time, String emails, Integer sync_num, Date create_time) {
-        this.sensor_id = sensor_id;
-        this.response_device_list = response_device_list;
+    public Monitor(Long sensorId, String responseDeviceList, String time, String emails, Integer sync_num, Boolean using, Date createTime) {
+        this.sensorId = sensorId;
+        this.responseDeviceList = responseDeviceList;
         this.time = time;
         this.emails = emails;
         this.sync_num = sync_num;
-        this.create_time = create_time;
+        this.using = using;
+        this.createTime = createTime;
     }
 
     public Monitor() {
     }
 
-    public Monitor(Long id, Long sensor_id, String response_device_list, String time, String emails, Integer sync_num, Boolean using, Date create_time, String extension) {
+    public Monitor(Long id) {
         this.id = id;
-        this.sensor_id = sensor_id;
-        this.response_device_list = response_device_list;
+    }
+
+    public Monitor(Long id, Long sensorId, String responseDeviceList, String time, String emails, Integer sync_num, Boolean using, Date createTime, String extension) {
+        this.id = id;
+        this.sensorId = sensorId;
+        this.responseDeviceList = responseDeviceList;
         this.time = time;
         this.emails = emails;
         this.sync_num = sync_num;
         this.using = using;
-        this.create_time = create_time;
+        this.createTime = createTime;
         this.extension = extension;
-    }
-
-    @Override
-    public String toString() {
-        return "Monitor{" +
-                "id=" + id +
-                ", sensor_id=" + sensor_id +
-                ", response_device_list='" + response_device_list + '\'' +
-                ", time='" + time + '\'' +
-                ", emails='" + emails + '\'' +
-                ", sync_num=" + sync_num +
-                ", using=" + using +
-                ", create_time=" + create_time +
-                ", extension='" + extension + '\'' +
-                '}';
     }
 }

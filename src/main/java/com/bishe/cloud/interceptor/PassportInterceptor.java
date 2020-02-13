@@ -15,19 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
-/**
- * Created by bishe.cloud on 2016/7/3.
- */
 @Component
 public class PassportInterceptor implements HandlerInterceptor {
 
-    @Autowired
+    @Resource
     private LoginTicketDAO loginTicketDAO;
 
-    @Autowired
+    @Resource
     private UserDAO userDAO;
 
-    @Autowired
+    @Resource
     private HostHolder hostHolder;
 
     @Override
@@ -56,7 +53,10 @@ public class PassportInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+        System.out.println("postHandle");
+        System.out.println(modelAndView);
         if (modelAndView != null && hostHolder.getUser() != null) {
+            System.out.println(hostHolder.getUser());
             modelAndView.addObject("user", hostHolder.getUser());
         }
     }

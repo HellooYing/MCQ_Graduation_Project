@@ -20,17 +20,17 @@ public class Sensor {
     /**
      * 传感器类型枚举编号
      */
-    private Integer sensor_type;
+    private Integer sensorType;
 
     /**
      * 归属仓库id
      */
-    private Long warehouse_id;
+    private Long warehouseId;
 
     /**
      * 树莓派id
      */
-    private Long pi_id;
+    private Long piId;
 
     /**
      * 传感器坐标
@@ -50,28 +50,28 @@ public class Sensor {
         this.id = id;
     }
 
-    public Integer getSensor_type() {
-        return sensor_type;
+    public Integer getSensorType() {
+        return sensorType;
     }
 
-    public void setSensor_type(Integer sensor_type) {
-        this.sensor_type = sensor_type;
+    public void setSensorType(Integer sensorType) {
+        this.sensorType = sensorType;
     }
 
-    public Long getWarehouse_id() {
-        return warehouse_id;
+    public Long getWarehouseId() {
+        return warehouseId;
     }
 
-    public void setWarehouse_id(Long warehouse_id) {
-        this.warehouse_id = warehouse_id;
+    public void setWarehouseId(Long warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
-    public Long getPi_id() {
-        return pi_id;
+    public Long getPiId() {
+        return piId;
     }
 
-    public void setPi_id(Long pi_id) {
-        this.pi_id = pi_id;
+    public void setPiId(Long piId) {
+        this.piId = piId;
     }
 
     public String getLocation() {
@@ -90,31 +90,35 @@ public class Sensor {
         this.extension = extension;
     }
 
-    public Sensor(Integer sensor_type, Long warehouse_id, Long pi_id, String location) {
-        this.sensor_type = sensor_type;
-        this.warehouse_id = warehouse_id;
-        this.pi_id = pi_id;
+    public Sensor(Integer sensorType, Long warehouseId, Long piId, String location) {
+        this.sensorType = sensorType;
+        this.warehouseId = warehouseId;
+        this.piId = piId;
         this.location = location;
     }
 
     public Sensor() {
     }
 
-    public Sensor(Integer sensor_type, Long warehouse_id, Long pi_id, String location, String extension) {
-        this.sensor_type = sensor_type;
-        this.warehouse_id = warehouse_id;
-        this.pi_id = pi_id;
+    public Sensor(Long id, Integer sensorType, Long warehouseId, Long piId, String location) {
+        this.id = id;
+        this.sensorType = sensorType;
+        this.warehouseId = warehouseId;
+        this.piId = piId;
         this.location = location;
-        this.extension = extension;
+    }
+
+    public Sensor(Long id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "Sensor{" +
                 "id=" + id +
-                ", sensor_type=" + sensor_type +
-                ", warehouse_id=" + warehouse_id +
-                ", pi_id=" + pi_id +
+                ", sensorType=" + sensorType +
+                ", warehouseId=" + warehouseId +
+                ", piId=" + piId +
                 ", location='" + location + '\'' +
                 ", extension='" + extension + '\'' +
                 '}';

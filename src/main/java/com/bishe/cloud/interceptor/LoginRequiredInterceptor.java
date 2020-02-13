@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class LoginRequiredInterceptor implements HandlerInterceptor {
 
-    @Autowired
+    @Resource
     private HostHolder hostHolder;
 
     @Override
