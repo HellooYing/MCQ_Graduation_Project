@@ -15,7 +15,7 @@ public class ResponseDeviceType {
      * 响应外设类型枚举编号
      */
     @Id
-    private Integer responseDeviceType;
+    private Integer id;
 
     /**
      * 响应外设名
@@ -30,18 +30,18 @@ public class ResponseDeviceType {
     @Override
     public String toString() {
         return "ResponseDeviceType{" +
-                "responseDeviceType=" + responseDeviceType +
+                "responseDeviceType=" + id +
                 ", name='" + name + '\'' +
                 ", extension='" + extension + '\'' +
                 '}';
     }
 
-    public Integer getResponseDeviceType() {
-        return responseDeviceType;
+    public Integer getId() {
+        return id;
     }
 
-    public void setResponseDeviceType(Integer responseDeviceType) {
-        this.responseDeviceType = responseDeviceType;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -64,13 +64,13 @@ public class ResponseDeviceType {
         this.name = name;
     }
 
-    public ResponseDeviceType(Integer responseDeviceType, String name) {
-        this.responseDeviceType = responseDeviceType;
+    public ResponseDeviceType(Integer id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public ResponseDeviceType(Integer responseDeviceType, String name, String extension) {
-        this.responseDeviceType = responseDeviceType;
+    public ResponseDeviceType(Integer id, String name, String extension) {
+        this.id = id;
         this.name = name;
         this.extension = extension;
     }
@@ -78,7 +78,7 @@ public class ResponseDeviceType {
     public ResponseDeviceType() {
     }
 
-    public ResponseDeviceType(Integer responseDeviceType) {
-        this.responseDeviceType = responseDeviceType;
+    public ResponseDeviceType(Integer id) {
+        this.id = id;
     }
 }

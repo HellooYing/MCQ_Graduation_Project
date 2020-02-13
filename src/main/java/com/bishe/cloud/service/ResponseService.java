@@ -5,6 +5,8 @@ import com.bishe.cloud.model.ResponseDeviceType;
 import com.bishe.cloud.model.ResponseRecord;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @description: 响应外设服务
  * @author: mayingying03
@@ -60,6 +62,13 @@ public interface ResponseService {
      * @return 响应外设类型
      */
     ResponseDeviceType getResponseDeviceType(int responseDeviceType);
+
+    /**
+     * 根据响应外设类型名查找响应外设类型
+     * @param name
+     * @return
+     */
+    List<ResponseDeviceType> getResponseDeviceTypeByName(String name);
 
     /**
      * 添加响应外设类型

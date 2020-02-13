@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import javax.annotation.Resource;
+
 @Component
 public class CloudWebConfiguration extends WebMvcConfigurationSupport {
     //将拦截器注册进来

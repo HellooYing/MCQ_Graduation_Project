@@ -28,7 +28,7 @@ public class SensorServiceImpl implements SensorService{
 
     @Override
     public int addSensorType(SensorType sensorType) {
-        return sensorTypeDAO.insert(sensorType);
+        return sensorTypeDAO.insertSelective(sensorType);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SensorServiceImpl implements SensorService{
 
     @Override
     public int addSensor(Sensor sensor) {
-        return sensorDAO.insert(sensor);
+        return sensorDAO.insertSelective(sensor);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class SensorServiceImpl implements SensorService{
 
     @Override
     public int addSensorDataRecord(SensorDataRecord sensorDataRecord) {
-        return sensorDataRecordDAO.insert(sensorDataRecord);
+        return sensorDataRecordDAO.insertSelective(sensorDataRecord);
     }
 
     @Override

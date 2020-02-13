@@ -15,7 +15,7 @@ public class SensorType {
      * 传感器类型枚举编号
      */
     @Id
-    private Integer sensorType;
+    private Integer id;
 
     /**
      * 传感器名
@@ -40,19 +40,19 @@ public class SensorType {
     @Override
     public String toString() {
         return "SensorType{" +
-                "sensorType=" + sensorType +
+                "sensorType=" + id +
                 ", name='" + name + '\'' +
                 ", valueType=" + valueType +
                 ", extension='" + extension + '\'' +
                 '}';
     }
 
-    public Integer getSensorType() {
-        return sensorType;
+    public Integer getId() {
+        return id;
     }
 
-    public void setSensorType(Integer sensorType) {
-        this.sensorType = sensorType;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -84,16 +84,16 @@ public class SensorType {
         this.valueType = valueType;
     }
 
-    public SensorType(Integer sensorType) {
-        this.sensorType = sensorType;
+    public SensorType(Integer id) {
+        this.id = id;
     }
 
     public SensorType(String name) {
         this.name = name;
     }
 
-    public SensorType(Integer sensorType, String name, Integer valueType) {
-        this.sensorType = sensorType;
+    public SensorType(Integer id, String name, Integer valueType) {
+        this.id = id;
         this.name = name;
         this.valueType = valueType;
     }

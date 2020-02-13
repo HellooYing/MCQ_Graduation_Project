@@ -20,7 +20,7 @@ public class PiServiceImpl implements PiService {
 
     @Override
     public int addPi(Pi pi) {
-        return piDAO.insert(pi);
+        return piDAO.insertSelective(pi);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class PiServiceImpl implements PiService {
 
     @Override
     public int updatePi(Pi pi) {
-        return piDAO.updateByPrimaryKey(pi);
+        return piDAO.updateByPrimaryKeySelective(pi);
     }
 
     @Override

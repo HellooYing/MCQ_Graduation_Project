@@ -1,12 +1,11 @@
 package com.bishe.cloud.interceptor;
 
 import com.bishe.cloud.model.HostHolder;
-import com.bishe.cloud.model.HostHolder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

@@ -10,6 +10,7 @@ import com.bishe.cloud.service.ResponseService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @description:
@@ -34,7 +35,7 @@ public class ResponseServiceImpl implements ResponseService {
 
     @Override
     public int addResponseRecord(ResponseRecord responseRecord) {
-        return responseRecordDAO.insert(responseRecord);
+        return responseRecordDAO.insertSelective(responseRecord);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class ResponseServiceImpl implements ResponseService {
 
     @Override
     public int addResponseDevice(ResponseDevice responseDevice) {
-        return responseDeviceDAO.insert(responseDevice);
+        return responseDeviceDAO.insertSelective(responseDevice);
     }
 
     @Override
@@ -63,8 +64,13 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     @Override
+    public List<ResponseDeviceType> getResponseDeviceTypeByName(String name) {
+        return responseDeviceTypeDAO.select(new ResponseDeviceType(name));
+    }
+
+    @Override
     public int addResponseDeviceType(ResponseDeviceType responseDeviceType) {
-        return responseDeviceTypeDAO.insert(responseDeviceType);
+        return responseDeviceTypeDAO.insertSelective(responseDeviceType);
     }
 
     @Override

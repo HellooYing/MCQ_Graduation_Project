@@ -27,11 +27,11 @@ create table `login_ticket`
 drop table if exists `sensor_type`;
 create table `sensor_type`
 (
-    `sensor_type` int(11) unsigned not null auto_increment comment '传感器类型枚举编号',
-    `name`        varchar(256)     not null default '' comment '传感器名',
-    `value_type`  int(11)          not null default 0 comment '传感器测量数值类型',
-    `extension`   varchar(256)     not null default '' comment '扩展字段',
-    primary key (`sensor_type`)
+    `id`         int(11) unsigned not null auto_increment comment '传感器类型枚举编号',
+    `name`       varchar(256)     not null default '' comment '传感器名',
+    `value_type` int(11)          not null default 0 comment '传感器测量数值类型',
+    `extension`  varchar(256)     not null default '' comment '扩展字段',
+    primary key (`id`)
 ) engine = innodb
   default charset = utf8;
 
@@ -65,10 +65,10 @@ create table `sensor_data_record`
 drop table if exists `response_device_type`;
 create table `response_device_type`
 (
-    `response_device_type` int(11) unsigned not null auto_increment comment '响应外设类型枚举编号',
-    `name`                 varchar(256)     not null default '' comment '响应外设名',
-    `extension`            varchar(256)     not null default '' comment '扩展字段',
-    primary key (`response_device_type`)
+    `id`        int(11) unsigned not null auto_increment comment '响应外设类型枚举编号',
+    `name`      varchar(256)     not null default '' comment '响应外设名',
+    `extension` varchar(256)     not null default '' comment '扩展字段',
+    primary key (`id`)
 ) engine = innodb
   default charset = utf8;
 
@@ -98,22 +98,6 @@ create table `response_record`
 ) engine = innodb
   default charset = utf8;
 
-drop table if exists `monitor`;
-create table `monitor`
-(
-    `id`                   bigint(20) unsigned not null auto_increment comment '监控计划id',
-    `sensor_id`            bigint(20)          not null default 0 comment '传感器id',
-    `response_device_list` varchar(256)        not null default '' comment '响应设备列表',
-    `time`                 varchar(256)        not null default '' comment '执行时间',
-    `emails`               varchar(256)        not null default '' comment '邮件通知组',
-    `sync_num`             int(11)             not null default 0 comment '从边缘设备批量同步一次监控数据的条数',
-    `using`                tinyint             not null default 0 comment '是否启用',
-    `create_time`          datetime            not null default '1970-01-01 00:00:00' comment '记录时间',
-    `extension`            varchar(256)        not null default '' comment '扩展字段',
-    primary key (`id`)
-) engine = innodb
-  default charset = utf8;
-
 drop table if exists `pi`;
 create table `pi`
 (
@@ -128,9 +112,9 @@ create table `pi`
 drop table if exists `authority_type`;
 create table `authority_type`
 (
-    `authority_type` int(11)      not null default 0 comment '权限类型枚举编号',
-    `name`           varchar(256) not null default '' comment '权限名称',
-    primary key (`authority_type`)
+    `id`   int(11)      not null default 0 comment '权限类型枚举编号',
+    `name` varchar(256) not null default '' comment '权限名称',
+    primary key (`id`)
 ) engine = innodb
   default charset = utf8;
 
@@ -140,6 +124,22 @@ create table `user_authority`
     `id`             bigint(20) unsigned not null auto_increment comment '用户权限id',
     `authority_type` int(11)             not null default 0 comment '权限类型枚举编号',
     `user_id`        int(11)             not null default 0 comment '用户id',
+    primary key (`id`)
+) engine = innodb
+  default charset = utf8;
+
+drop table if exists `monitor`;
+create table `monitor`
+(
+    `id`                   bigint(20) unsigned not null auto_increment comment '监控计划id',
+    `sensor_id`            bigint(20)          not null default 0 comment '传感器id',
+    `response_device_list` varchar(256)        not null default '' comment '响应设备列表',
+    `time`                 varchar(256)        not null default '' comment '执行时间',
+    `emails`               varchar(256)        not null default '' comment '邮件通知组',
+    `sync_num`             int(11)             not null default 0 comment '从边缘设备批量同步一次监控数据的条数',
+    `using`                tinyint             not null default 0 comment '是否启用',
+    `create_time`          datetime            not null default '1970-01-01 00:00:00' comment '记录时间',
+    `extension`            varchar(256)        not null default '' comment '扩展字段',
     primary key (`id`)
 ) engine = innodb
   default charset = utf8;

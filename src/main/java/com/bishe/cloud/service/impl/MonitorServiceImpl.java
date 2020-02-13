@@ -20,7 +20,7 @@ public class MonitorServiceImpl implements MonitorService {
 
     @Override
     public int addMonitor(Monitor monitor) {
-        return monitorDAO.insert(monitor);
+        return monitorDAO.insertSelective(monitor);
     }
 
     @Override
