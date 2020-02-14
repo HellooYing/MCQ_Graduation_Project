@@ -142,6 +142,15 @@ public class Monitor {
         this.extension = extension;
     }
 
+    public Monitor(Long id, Long sensorId, String responseDeviceList, String time, String emails, Integer sync_num) {
+        this.id = id;
+        this.sensorId = sensorId;
+        this.responseDeviceList = responseDeviceList;
+        this.time = time;
+        this.emails = emails;
+        this.sync_num = sync_num;
+    }
+
     public Monitor(Long sensorId, String responseDeviceList, String time, String emails, Integer sync_num, Boolean using, Date createTime) {
         this.sensorId = sensorId;
         this.responseDeviceList = responseDeviceList;

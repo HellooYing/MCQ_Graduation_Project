@@ -20,4 +20,8 @@ public interface MonitorService {
     Monitor getMonitor(long id);
 
     List<Monitor> getAll();
+
+    boolean doMonitor(long id);
+
+    boolean undoMonitor(long id);
 }

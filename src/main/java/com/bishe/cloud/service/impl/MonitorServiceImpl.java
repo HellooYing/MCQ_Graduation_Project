@@ -1,5 +1,6 @@
 package com.bishe.cloud.service.impl;
 
+import com.bishe.cloud.common.ResultBase;
 import com.bishe.cloud.dao.MonitorDAO;
 import com.bishe.cloud.model.Monitor;
 import com.bishe.cloud.service.MonitorService;
@@ -42,5 +43,35 @@ public class MonitorServiceImpl implements MonitorService {
     @Override
     public List<Monitor> getAll() {
         return monitorDAO.selectAll();
+    }
+
+    @Override
+    public boolean doMonitor(long id) {
+        Monitor monitor=getMonitor(id);
+        //todo 通知边缘端启动该监控
+        ResultBase<Integer> result=new ResultBase<>(true);
+        if(result.isSuccess()){
+            monitor.setUsing(true);
+            updateMonitor(monitor);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean undoMonitor(long id) {
+        Monitor monitor=getMonitor(id);
+        //todo 通知边缘端关闭该监控
+        ResultBase<Integer> result=new ResultBase<>(true);
+        if(result.isSuccess()){
+            monitor.setUsing(false);
+            updateMonitor(monitor);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
