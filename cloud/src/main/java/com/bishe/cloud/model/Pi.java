@@ -28,6 +28,11 @@ public class Pi {
     private String location;
 
     /**
+     * 树莓派上的服务的访问地址
+     */
+    private String url;
+
+    /**
      * 扩展字段
      */
     private String extension;
@@ -56,6 +61,14 @@ public class Pi {
         this.location = location;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public String getExtension() {
         return extension;
     }
@@ -74,6 +87,12 @@ public class Pi {
     public Pi(Long warehouseId, String location) {
         this.warehouseId = warehouseId;
         this.location = location;
+    }
+
+    public Pi(Long warehouseId, String location, String url) {
+        this.warehouseId = warehouseId;
+        this.location = location;
+        this.url = url;
     }
 
     public Pi(Long id, Long warehouseId, String location) {

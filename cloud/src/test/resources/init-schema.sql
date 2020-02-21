@@ -104,6 +104,7 @@ create table `pi`
     `id`           bigint(20) unsigned not null auto_increment comment '边缘设备id',
     `warehouse_id` bigint(20)          not null default 0 comment '归属仓库id',
     `location`     varchar(256)        not null default '' comment '坐标',
+    `url`          varchar(256)        not null default '' comment '树莓派上的服务的访问地址',
     `extension`    varchar(256)        not null default '' comment '扩展字段',
     primary key (`id`)
 ) engine = innodb
@@ -144,4 +145,5 @@ create table `monitor`
 ) engine = innodb
   default charset = utf8;
 
-insert into authority_type (name) values('查看全部数据');
+insert into authority_type (name)
+values ('查看全部数据');

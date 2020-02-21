@@ -8,12 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @description: 设备管理
@@ -30,6 +28,66 @@ public class DeviceController {
     PiService piService;
     @Resource
     SensorService sensorService;
+
+    @RequestMapping(path = {"/getSensorTypeId"}, method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getSensorTypeId(@RequestParam("name") String name) {
+        try {
+            List<SensorType> list = sensorService.getSensorTypeByName(name);
+            if(list.size()==0){
+                return "not found";
+            }
+            return list.get(0).getId().toString();
+        } catch (Exception e) {
+            logger.error("根据传感器类型名查找类型id错误" + e.getMessage());
+            return "failed";
+        }
+    }
+
+    @RequestMapping(path = {"/getSensorTypeName"}, method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getSensorTypeName(@RequestParam("id") int id) {
+        try {
+            SensorType sensorType = sensorService.getSensorType(id);
+            if(sensorType==null){
+                return "not found";
+            }
+            return sensorType.getName();
+        } catch (Exception e) {
+            logger.error("根据响应外设类型id查找类型名错误" + e.getMessage());
+            return "failed";
+        }
+    }
+
+    @RequestMapping(path = {"/getResponseDeviceTypeId"}, method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getResponseDeviceTypeId(@RequestParam("name") String name) {
+        try {
+            List<ResponseDeviceType> list = responseService.getResponseDeviceTypeByName(name);
+            if(list.size()==0){
+                return "not found";
+            }
+            return list.get(0).getId().toString();
+        } catch (Exception e) {
+            logger.error("根据响应外设类型名查找类型id错误" + e.getMessage());
+            return "failed";
+        }
+    }
+
+    @RequestMapping(path = {"/getResponseDeviceTypeName"}, method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String getResponseDeviceTypeName(@RequestParam("id") int id) {
+        try {
+            ResponseDeviceType responseDeviceType = responseService.getResponseDeviceType(id);
+            if(responseDeviceType==null){
+                return "not found";
+            }
+            return responseDeviceType.getName();
+        } catch (Exception e) {
+            logger.error("根据响应外设类型id查找类型名错误" + e.getMessage());
+            return "failed";
+        }
+    }
 
     @RequestMapping(path = {"/sensor"}, method = {RequestMethod.GET,RequestMethod.POST})
     public String sensor(Model model) {
@@ -83,27 +141,34 @@ public class DeviceController {
     }
 
     @RequestMapping(path = {"/addPi"}, method = {RequestMethod.POST})
+    @ResponseBody
     public String addPi(@RequestParam("warehouseId") long warehouseId,
-                        @RequestParam("location") String location) {
+                        @RequestParam("location") String location,
+                        @RequestParam("url") String url) {
         try {
-            piService.addPi(new Pi(warehouseId, location));
+            Pi pi = new Pi(warehouseId, location, url);
+            piService.addPi(pi);
+            return String.valueOf(pi.getId());
         } catch (Exception e) {
             logger.error("添加边缘设备错误" + e.getMessage());
+            return "failed";
         }
-        return "redirect:/home";
     }
 
     @RequestMapping(path = {"/addSensor"}, method = {RequestMethod.POST})
+    @ResponseBody
     public String addSensor(@RequestParam("sensorType") int sensorType,
                             @RequestParam("warehouseId") long warehouseId,
                             @RequestParam("piId") long piId,
                             @RequestParam("location") String location) {
         try {
-            sensorService.addSensor(new Sensor(sensorType, warehouseId, piId, location));
+            Sensor sensor=new Sensor(sensorType, warehouseId, piId, location);
+            sensorService.addSensor(sensor);
+            return String.valueOf(sensor.getId());
         } catch (Exception e) {
             logger.error("添加传感器错误" + e.getMessage());
+            return "failed";
         }
-        return "redirect:/home";
     }
 
     @RequestMapping(path = {"/addSensorType"}, method = {RequestMethod.POST})
@@ -117,16 +182,19 @@ public class DeviceController {
     }
 
     @RequestMapping(path = {"/addResponseDevice"}, method = {RequestMethod.POST})
+    @ResponseBody
     public String addResponseDevice(@RequestParam("responseDeviceType") int responseDeviceType,
                                     @RequestParam("warehouseId") long warehouseId,
                                     @RequestParam("piId") long piId,
                                     @RequestParam("location") String location) {
         try {
-            responseService.addResponseDevice(new ResponseDevice(responseDeviceType, warehouseId, piId, location));
+            ResponseDevice responseDevice=new ResponseDevice(responseDeviceType, warehouseId, piId, location);
+            responseService.addResponseDevice(responseDevice);
+            return String.valueOf(responseDevice.getId());
         } catch (Exception e) {
             logger.error("添加响应外设错误" + e.getMessage());
+            return "failed";
         }
-        return "redirect:/home";
     }
 
     @RequestMapping(path = {"/addResponseDeviceType"}, method = {RequestMethod.POST})

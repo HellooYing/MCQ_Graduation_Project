@@ -101,4 +101,9 @@ public class SensorServiceImpl implements SensorService{
     public List<SensorDataRecord> getAllRecord() {
         return sensorDataRecordDAO.selectAll();
     }
+
+    @Override
+    public List<SensorType> getSensorTypeByName(String name) {
+        return sensorTypeDAO.select(new SensorType(name));
+    }
 }

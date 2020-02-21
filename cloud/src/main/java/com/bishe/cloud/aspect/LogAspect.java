@@ -19,8 +19,9 @@ public class LogAspect {
     @Before("execution(* com.bishe.cloud.controller.*Controller.*(..))")
     public void beforeMethod(JoinPoint joinPoint) {
         StringBuilder sb = new StringBuilder();
+        sb.append(joinPoint.toString());
         for (Object arg : joinPoint.getArgs()) {
-            sb.append("arg:" + arg.toString() + "|");
+            sb.append(" arg:" + arg.toString() + "|");
         }
         logger.info("before method: " + sb.toString());
     }
