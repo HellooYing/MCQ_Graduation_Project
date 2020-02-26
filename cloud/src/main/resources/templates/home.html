@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>校园头条</title>
+    <meta name="viewport"
+          content="width=device-width, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <link rel="stylesheet" type="text/css" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/styles/font-awesome.min.css">
+    <link rel="stylesheet" media="all" href="/styles/style.css">
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/main/base/base.js"></script>
+    <script type="text/javascript" src="/scripts/main/base/util.js"></script>
+    <script type="text/javascript" src="/scripts/main/base/event.js"></script>
+    <script type="text/javascript" src="/scripts/main/base/upload.js"></script>
+    <script type="text/javascript" src="/scripts/main/component/component.js"></script>
+    <script type="text/javascript" src="/scripts/main/component/popup.js"></script>
+    <script type="text/javascript" src="/scripts/main/component/popupLogin.js"></script>
+    <script type="text/javascript" src="/scripts/main/component/upload.js"></script>
+    <script type="text/javascript" src="/scripts/main/component/popupUpload.js"></script>
+    <script type="text/javascript" src="/scripts/main/util/action.js"></script>
+    </head>
+<body class="welcome_index">
+
+<header class="navbar navbar-default navbar-static-top bs-docs-nav" id="top" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+                    data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a href="/" class="navbar-brand logo">
+                <h1>校园头条资讯</h1>
+                <h3>你关心的才是头条</h3>
+            </a>
+        </div>
+
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+
+            <ul th:if="${user}" class="nav navbar-nav navbar-right">
+                <li class="js-share"><a href="javascript:void(0);">分享</a></li>
+                <li class=""><a href="/msg/list">站内信</a></li>
+                <li class=""><a th:text="${user.name}" href="/user/${user.id}/"></a></li>
+                <li class=""><a href="/logout/">退出</a></li>
+            </ul>
+            <ul th:unless="${user}" class="nav navbar-nav navbar-right">
+                <li class="js-login"><a href="javascript:void(0);">登陆</a></li>
+            </ul>
+
+        </nav>
+    </div>
+</header>
+
+
+<div id="main">
+    <div class="container" id="daily">
+        <a href="/pi">show pis</a>  <div th:text="${pis}"></div>
+        <a href="/sensor">show sensors</a><div th:text="${sensors}"></div>
+        <a href="/sensorType">show sensorTypes</a> <div th:text="${sensorTypes}"></div>
+        <a href="/responseDevice">show responseDevices</a> <div th:text="${responseDevices}"></div>
+        <a href="/responseDeviceType">show responseDeviceTypes</a>  <div th:text="${responseDeviceTypes}"></div>
+    </div>
+
+</div>
+
+
+
+<!--<script th:if="${pop!=null}">-->
+<!--    window.loginpop = $!{pop};-->
+<!--</script>-->
+
+<script type="text/javascript" src="/scripts/main/site/home.js"></script>
+
+<footer>
+    <div class="container">
+        <p class="text-center">
+            东北大学-计算机1606
+        </p>
+        <p class="text-center">© 校园头条</p>
+    </div>
+
+</footer>
+
+
+</body>
+</html>
