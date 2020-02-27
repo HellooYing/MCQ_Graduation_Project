@@ -1,4 +1,7 @@
+# -*- coding: UTF-8 -*-
 from django.db import models
+from app.utils import *
+import datetime
 
 #python3 manage.py makemigrations
 #python3 manage.py migrate
@@ -11,7 +14,7 @@ class ResponseDevice(models.Model):
     location = models.CharField('响应外设坐标',max_length = 150,default = '')
     extension = models.CharField('扩展字段',max_length = 150,default = '')
     def __str__(self):
-        return str(self.responseDeviceName+self.id)
+        return self.responseDeviceName+str(self.id)
     class Meta:
         ordering = ["id"]
     
@@ -24,7 +27,7 @@ class Sensor(models.Model):
     location = models.CharField('响应外设坐标',max_length = 150,default = '')
     extension = models.CharField('扩展字段',max_length = 150,default = '')
     def __str__(self):
-        return str(self.sensorName+self.id)
+        return self.sensorName+str(self.id)
     class Meta:
         ordering = ["id"]
         
@@ -36,7 +39,7 @@ class Monitor(models.Model):
     emails = models.CharField('邮件通知组',max_length = 150,default = '')
     sync_num = models.IntegerField('从边缘设备批量同步监控数据的条数',default = 100)
     def __str__(self):
-        return str('监控任务'+id+'传感器'+sensorId)
+        return '监控任务'+str(self.id)+' by'+getSensorTypeName(self.sensorId)+str(self.sensorId)
     class Meta:
         ordering = ["id"]
         
@@ -48,7 +51,18 @@ class Pi(models.Model):
     url = models.CharField('访问地址',max_length = 150,default = '')
     extension = models.CharField('扩展字段',max_length = 150,default = '')
     def __str__(self):
-        return str(self.responseDeviceName+self.id)
+        return self.responseDeviceName+str(self.id)
+    class Meta:
+        ordering = ["id"]
+
+
+class SensorDataRecord(models.Model):
+    id = models.AutoField('id',primary_key=True)
+    sensorId = models.IntegerField('传感器id',default = 0)
+    value = models.IntegerField('值',default = 0)
+    createTime = models.DateTimeField('创建时间',default = datetime.datetime.now)
+    def __str__(self):
+        return self.responseDeviceName+str(self.id)
     class Meta:
         ordering = ["id"]
     

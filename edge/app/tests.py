@@ -1,3 +1,6 @@
-from django.test import TestCase
+# from django.test import TestCase
 
-# Create your tests here.
+import sensor
+
+t = eval('sensor.test.f')
+t()

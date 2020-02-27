@@ -1,14 +1,68 @@
+# -*- coding: UTF-8 -*-
 from django.http import HttpResponse
 from django.shortcuts import render
 import json
 from app.utils import *
 import requests
 from .models import *
+import sensor
 
 
+piId=-1
+warehouseId=-1
 
 alive_monitor={}
+
+def getWarehouseId():
+    global warehouseId
+    if warehouseId!=-1:
+        return warehouseId
+    pis=Pi.objects.all()
+    warehouseId=-1
+    for pi in pis:
+        warehouseId=pi.warehouseId
+    if warehouseId==-1:
+        return -1
+    else:
+        return warehouseId
+
+def getPiId():
+    global piId
+    if piId!=-1:
+        return piId
+    pis=Pi.objects.all()
+    piId=-1
+    for pi in pis:
+        piId=pi.id
+    if piId==-1:
+        return -1
+    else:
+        return piId
+
+def monitoring(monitor):
+    global warehouseId
+    while true:
+        if monitor_id in alive:
+            return
+        func = eval('sensor.'+str(monitor.id)+'.f')
+        result=func()
+        sensorRecord=SensorDataRecord()
+        sensorRecord.sensorId=monitor.sensorId
+        sensorRecord.value=
+
+
+        
+        
+
 def doMonitor(request):
+    
+    getPiId()
+    getWarehouseId()
+    global piId
+    global warehouseId
+    if piId==-1 or warehouseId==-1:
+        print("边缘设备注册异常，边缘设备号与仓库号为空！请重新注册")
+
     monitor=request.POST.get("warehouseId")
     response = HttpResponse()
     response.status_code = 200
@@ -16,8 +70,15 @@ def doMonitor(request):
     return response
     
 def addMonitor(request):
-    print("????????????????????????/")
-    print(request.POST.get('abc'))
+    monitor=Monitor()
+    monitor.id=request.POST.get('id')
+    monitor.sensorId=request.POST.get('sensorId')
+    monitor.responseDeviceList=request.POST.get('responseDeviceList')
+    monitor.time=request.POST.get('time')
+    monitor.emails=request.POST.get('emails')
+    monitor.sync_num=request.POST.get('sync_num')
+    monitor.save()
+    print(Monitor.objects.all())
     response = HttpResponse()
     response.status_code = 200
     response.content = 'ok'
@@ -25,7 +86,7 @@ def addMonitor(request):
 
 def registeredPi(request):
     response = HttpResponse()
-    warehouseId=request.POST.get("warehouseId")
+    global warehouseId=request.POST.get("warehouseId")
     location=request.POST.get("location")
     pi=Pi()
     pi.warehouseId=warehouseId
@@ -35,6 +96,7 @@ def registeredPi(request):
     r = requests.post(url+'/addPi', data=payload)
     if r.status_code==200 and r.text!='failed':
         pi.id=r.text
+        global piId=pi.id
         pi.save()
         response.status_code = 200
         response.content = 'ok'
@@ -97,6 +159,7 @@ def addSensor(request):
     sensor.sensorName=sensorName
     sensor.warehouseId=warehouseId
     sensor.piId=piId
+
     sensor.location=location
     typeId=getSensorTypeId(sensorName)
     if typeId=='failed':
