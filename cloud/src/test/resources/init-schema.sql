@@ -56,6 +56,7 @@ create table `sensor_data_record`
     `warehouse_id` bigint(20)          not null default 0 comment '归属仓库id',
     `sensor_id`    bigint(20)          not null default 0 comment '传感器id',
     `value`        varchar(256)        not null default '' comment '记录值',
+    `normal`       tinyint             not null default 0 comment '是否正常',
     `create_time`  timestamp           not null default current_timestamp comment '记录时间',
     `extension`    varchar(256)        not null default '' comment '扩展字段',
     primary key (`id`)
@@ -138,7 +139,8 @@ create table `monitor`
     `time`                 varchar(256)        not null default '' comment '执行时间',
     `emails`               varchar(256)        not null default '' comment '邮件通知组',
     `sync_num`             int(11)             not null default 0 comment '从边缘设备批量同步一次监控数据的条数',
-    `is_using`                  tinyint             not null default 0 comment '是否启用',
+    `is_using`             tinyint             not null default 0 comment '是否启用',
+    `abnormal`             varchar(256)        not null default '' comment '异常表达式',
     `create_time`          timestamp           not null default current_timestamp comment '记录时间',
     `extension`            varchar(256)        not null default '' comment '扩展字段',
     primary key (`id`)

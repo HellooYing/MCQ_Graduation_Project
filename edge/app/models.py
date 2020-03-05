@@ -3,8 +3,8 @@ from django.db import models
 from app.utils import *
 import datetime
 
-#python3 manage.py makemigrations
-#python3 manage.py migrate
+#python manage.py makemigrations
+#python manage.py migrate
 
 class ResponseDevice(models.Model):
     id = models.IntegerField('id',primary_key=True)
@@ -37,7 +37,8 @@ class Monitor(models.Model):
     responseDeviceList = models.CharField('响应设备列表',max_length = 150,default = '')
     time = models.CharField('执行时间表达式',max_length = 150,default = '10')
     emails = models.CharField('邮件通知组',max_length = 150,default = '')
-    sync_num = models.IntegerField('从边缘设备批量同步监控数据的条数',default = 100)
+    sync_num = models.IntegerField('从边缘设备批量同步监控数据的条数',default = 0)
+    abnormal = models.CharField('异常表达式',max_length = 150,default = '')
     def __str__(self):
         return '监控任务'+str(self.id)+' by'+getSensorTypeName(self.sensorId)+str(self.sensorId)
     class Meta:
@@ -51,7 +52,7 @@ class Pi(models.Model):
     url = models.CharField('访问地址',max_length = 150,default = '')
     extension = models.CharField('扩展字段',max_length = 150,default = '')
     def __str__(self):
-        return self.responseDeviceName+str(self.id)
+        return '边缘设备'+str(self.id)
     class Meta:
         ordering = ["id"]
 
@@ -60,9 +61,10 @@ class SensorDataRecord(models.Model):
     id = models.AutoField('id',primary_key=True)
     sensorId = models.IntegerField('传感器id',default = 0)
     value = models.IntegerField('值',default = 0)
+    normal = models.IntegerField('是否正常',default = 1)
     createTime = models.DateTimeField('创建时间',default = datetime.datetime.now)
     def __str__(self):
-        return self.responseDeviceName+str(self.id)
+        return '{"id":'+str(self.id)+',"sensorId":'+str(self.sensorId)+',"value":'+str(self.value)+',"normal":'+str(self.normal)+',"createTime":"'+str(self.createTime).split('.')[0]+'"}'
     class Meta:
         ordering = ["id"]
     

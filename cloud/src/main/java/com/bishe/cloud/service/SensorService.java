@@ -46,5 +46,7 @@ public interface SensorService {
 
     List<SensorDataRecord> getAllRecord();
 
-    List<SensorType> getSensorTypeByName(String name);
+    SensorType getSensorTypeByName(String name);
+
+    int insertSensorDataRecord(List<SensorDataRecord> list);
 }

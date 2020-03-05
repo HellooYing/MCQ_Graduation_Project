@@ -68,7 +68,7 @@ public interface ResponseService {
      * @param name
      * @return
      */
-    List<ResponseDeviceType> getResponseDeviceTypeByName(String name);
+    ResponseDeviceType getResponseDeviceTypeByName(String name);
 
     /**
      * 添加响应外设类型

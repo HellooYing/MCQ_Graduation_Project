@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bishe.cloud.dao.SensorDataRecordDAO">
+    <insert id="insertList">
+        INSERT INTO sensor_data_record(warehouse_id,sensor_type,sensor_id,value,normal,create_time)
+        VALUES
+        <foreach collection="list" item="data" separator=",">
+            (#{data.warehouseId},#{data.sensorType},#{data.sensorId},#{data.value},#{data.normal},#{data.createTime})
+        </foreach>
+    </insert>
+</mapper>

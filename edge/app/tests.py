@@ -1,6 +1,6 @@
 # from django.test import TestCase
-
 import sensor
 
-t = eval('sensor.test.f')
-t()
+func = eval('sensor.m1.f')
+result=func()
+

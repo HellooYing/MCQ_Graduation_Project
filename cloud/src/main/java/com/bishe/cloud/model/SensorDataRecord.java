@@ -43,6 +43,11 @@ public class SensorDataRecord {
     private String value;
 
     /**
+     * 是否正常
+     */
+    private Boolean normal;
+
+    /**
      * 记录时间
      */
     private Date createTime;
@@ -60,9 +65,18 @@ public class SensorDataRecord {
                 ", sensorType=" + sensorType +
                 ", sensorId=" + sensorId +
                 ", value='" + value + '\'' +
+                ", normal=" + normal +
                 ", createTime=" + createTime +
                 ", extension='" + extension + '\'' +
                 '}';
+    }
+
+    public Boolean getNormal() {
+        return normal;
+    }
+
+    public void setNormal(Boolean normal) {
+        this.normal = normal;
     }
 
     public Long getId() {

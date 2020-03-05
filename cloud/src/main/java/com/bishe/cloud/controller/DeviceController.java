@@ -33,18 +33,18 @@ public class DeviceController {
     @ResponseBody
     public String getSensorTypeId(@RequestParam("name") String name) {
         try {
-            List<SensorType> list = sensorService.getSensorTypeByName(name);
-            if(list.size()==0){
+            SensorType sensorType = sensorService.getSensorTypeByName(name);
+            if(sensorType==null){
                 return "not found";
             }
-            return list.get(0).getId().toString();
+            return sensorType.getId().toString();
         } catch (Exception e) {
             logger.error("根据传感器类型名查找类型id错误" + e.getMessage());
             return "failed";
         }
     }
 
-    @RequestMapping(path = {"/getSensorTypeName"}, method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = {"/getSensorTypeName"}, method = {RequestMethod.GET,RequestMethod.POST},produces = "application/json;charset=utf-8")
     @ResponseBody
     public String getSensorTypeName(@RequestParam("id") int id) {
         try {
@@ -63,18 +63,18 @@ public class DeviceController {
     @ResponseBody
     public String getResponseDeviceTypeId(@RequestParam("name") String name) {
         try {
-            List<ResponseDeviceType> list = responseService.getResponseDeviceTypeByName(name);
-            if(list.size()==0){
+            ResponseDeviceType responseDeviceType = responseService.getResponseDeviceTypeByName(name);
+            if(responseDeviceType==null){
                 return "not found";
             }
-            return list.get(0).getId().toString();
+            return responseDeviceType.getId().toString();
         } catch (Exception e) {
             logger.error("根据响应外设类型名查找类型id错误" + e.getMessage());
             return "failed";
         }
     }
 
-    @RequestMapping(path = {"/getResponseDeviceTypeName"}, method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = {"/getResponseDeviceTypeName"}, method = {RequestMethod.GET,RequestMethod.POST},produces = "application/json;charset=utf-8")
     @ResponseBody
     public String getResponseDeviceTypeName(@RequestParam("id") int id) {
         try {
@@ -157,12 +157,17 @@ public class DeviceController {
 
     @RequestMapping(path = {"/addSensor"}, method = {RequestMethod.POST})
     @ResponseBody
-    public String addSensor(@RequestParam("sensorType") int sensorType,
+    public String addSensor(@RequestParam("sensorName") String sensorName,
                             @RequestParam("warehouseId") long warehouseId,
                             @RequestParam("piId") long piId,
                             @RequestParam("location") String location) {
         try {
-            Sensor sensor=new Sensor(sensorType, warehouseId, piId, location);
+            SensorType sensorType=sensorService.getSensorTypeByName(sensorName);
+            if(sensorType==null){
+                logger.error("添加传感器错误,无此传感器类型");
+                return "failed";
+            }
+            Sensor sensor=new Sensor(sensorType.getId(), warehouseId, piId, location);
             sensorService.addSensor(sensor);
             return String.valueOf(sensor.getId());
         } catch (Exception e) {
@@ -172,9 +177,10 @@ public class DeviceController {
     }
 
     @RequestMapping(path = {"/addSensorType"}, method = {RequestMethod.POST})
-    public String addSensorType(@RequestParam("name") String name) {
+    public String addSensorType(@RequestParam("name") String name,@RequestParam("valueType") Integer valueType) {
         try {
-            sensorService.addSensorType(new SensorType(name));
+            sensorService.addSensorType(new SensorType(name,valueType));
+
         } catch (Exception e) {
             logger.error("添加传感器类型错误" + e.getMessage());
         }
@@ -183,12 +189,17 @@ public class DeviceController {
 
     @RequestMapping(path = {"/addResponseDevice"}, method = {RequestMethod.POST})
     @ResponseBody
-    public String addResponseDevice(@RequestParam("responseDeviceType") int responseDeviceType,
+    public String addResponseDevice(@RequestParam("responseDeviceName") String responseDeviceName,
                                     @RequestParam("warehouseId") long warehouseId,
                                     @RequestParam("piId") long piId,
                                     @RequestParam("location") String location) {
         try {
-            ResponseDevice responseDevice=new ResponseDevice(responseDeviceType, warehouseId, piId, location);
+            ResponseDeviceType responseDeviceType = responseService.getResponseDeviceTypeByName(responseDeviceName);
+            if(responseDeviceType==null){
+                logger.error("添加响应外设错误,无此外设类型");
+                return "failed";
+            }
+            ResponseDevice responseDevice=new ResponseDevice(responseDeviceType.getId(), warehouseId, piId, location);
             responseService.addResponseDevice(responseDevice);
             return String.valueOf(responseDevice.getId());
         } catch (Exception e) {

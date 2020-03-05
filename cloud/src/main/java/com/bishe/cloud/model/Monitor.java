@@ -46,6 +46,11 @@ public class Monitor {
     private Boolean isUsing;
 
     /**
+     * 异常值、异常范围
+     */
+    private String abnormal;
+
+    /**
      * 创建计划时间
      */
     private Date createTime;
@@ -126,8 +131,24 @@ public class Monitor {
         this.isUsing = isUsing;
     }
 
+    public Boolean getUsing() {
+        return isUsing;
+    }
+
+    public void setUsing(Boolean using) {
+        isUsing = using;
+    }
+
     public Date getCreateTime() {
         return createTime;
+    }
+
+    public String getAbnormal() {
+        return abnormal;
+    }
+
+    public void setAbnormal(String abnormal) {
+        this.abnormal = abnormal;
     }
 
     public void setCreateTime(Date createTime) {
@@ -142,22 +163,24 @@ public class Monitor {
         this.extension = extension;
     }
 
-    public Monitor(Long id, Long sensorId, String responseDeviceList, String time, String emails, Integer syncNum) {
+    public Monitor(Long id, Long sensorId, String responseDeviceList, String time, String emails, Integer syncNum,String abnormal) {
         this.id = id;
         this.sensorId = sensorId;
         this.responseDeviceList = responseDeviceList;
         this.time = time;
         this.emails = emails;
         this.syncNum = syncNum;
+        this.abnormal=abnormal;
     }
 
-    public Monitor(Long sensorId, String responseDeviceList, String time, String emails, Integer syncNum, Boolean isUsing) {
+    public Monitor(Long sensorId, String responseDeviceList, String time, String emails, Integer syncNum, Boolean isUsing,String abnormal) {
         this.sensorId = sensorId;
         this.responseDeviceList = responseDeviceList;
         this.time = time;
         this.emails = emails;
         this.syncNum = syncNum;
         this.isUsing = isUsing;
+        this.abnormal=abnormal;
     }
 
     public Monitor() {

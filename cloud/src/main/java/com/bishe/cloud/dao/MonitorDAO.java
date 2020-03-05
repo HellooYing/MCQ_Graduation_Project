@@ -13,5 +13,5 @@ import tk.mybatis.mapper.common.Mapper;
  */
 public interface MonitorDAO extends Mapper<Monitor> {
     @Select({"select url from pi where id=(select pi_id from monitor join sensor on monitor.sensor_id=sensor.id where monitor.id=#{id})"})
-    Long getUrl(Long id);
+    String getUrl(Long id);
 }

@@ -4,6 +4,7 @@ import com.bishe.cloud.common.ResultBase;
 import com.bishe.cloud.dao.MonitorDAO;
 import com.bishe.cloud.model.Monitor;
 import com.bishe.cloud.service.MonitorService;
+import com.bishe.cloud.util.CloudUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +22,8 @@ import java.util.Map;
 public class MonitorServiceImpl implements MonitorService {
     @Resource
     MonitorDAO monitorDAO;
+    @Resource
+    MonitorService monitorService;
 
     @Override
     public int addMonitor(Monitor monitor) {
@@ -48,31 +51,31 @@ public class MonitorServiceImpl implements MonitorService {
     }
 
     @Override
-    public boolean doMonitor(long id) {
-        Monitor monitor=getMonitor(id);
-        //todo 通知边缘端启动该监控
-        ResultBase<Integer> result=new ResultBase<>(true);
-        if(result.isSuccess()){
+    public boolean doMonitor(Long id) {
+        Map<String,String> map=new HashMap<>();
+        map.put("id",id.toString());
+        String result = CloudUtil.sendPost("http://"+monitorService.getUrl(id) + "/doMonitor", map);
+        if (result.equals("ok")) {
+            Monitor monitor=getMonitor(id);
             monitor.setIsUsing(true);
             updateMonitor(monitor);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     @Override
-    public boolean undoMonitor(long id) {
-        Monitor monitor=getMonitor(id);
-        //todo 通知边缘端关闭该监控
-        ResultBase<Integer> result=new ResultBase<>(true);
-        if(result.isSuccess()){
+    public boolean undoMonitor(Long id) {
+        Map<String,String> map=new HashMap<>();
+        map.put("id",id.toString());
+        String result = CloudUtil.sendPost("http://"+monitorService.getUrl(id) + "/undoMonitor", map);
+        if (result.equals("ok")) {
+            Monitor monitor=getMonitor(id);
             monitor.setIsUsing(false);
             updateMonitor(monitor);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -87,5 +90,10 @@ public class MonitorServiceImpl implements MonitorService {
         map.put("emails",monitor.getEmails());
         map.put("sync_num",monitor.getSyncNum().toString());
         return map;
+    }
+
+    @Override
+    public String getUrl(Long id) {
+        return monitorDAO.getUrl(id);
     }
 }

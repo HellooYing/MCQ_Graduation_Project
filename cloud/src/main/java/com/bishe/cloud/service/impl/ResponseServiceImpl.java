@@ -64,8 +64,10 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     @Override
-    public List<ResponseDeviceType> getResponseDeviceTypeByName(String name) {
-        return responseDeviceTypeDAO.select(new ResponseDeviceType(name));
+    public ResponseDeviceType getResponseDeviceTypeByName(String name) {
+        List<ResponseDeviceType> list = responseDeviceTypeDAO.select(new ResponseDeviceType(name));
+        if(list.size()==0) return null;
+        else return list.get(0);
     }
 
     @Override

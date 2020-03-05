@@ -20,9 +20,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -50,7 +48,10 @@ public class CloudApplicationTests {
 
     @Test
     public void contextLoads() {
-        System.out.println(monitorDAO.getUrl(1l));
+        List<SensorDataRecord> list=new ArrayList<>();
+        list.add(new SensorDataRecord(1l,1,1l,"1"));
+        list.add(new SensorDataRecord(1l,1,1l,"2"));
+        sensorService.insertSensorDataRecord(list);
     }
 
 //    @Test
@@ -132,7 +133,7 @@ public class CloudApplicationTests {
 		sensorService.updateSensorById(sensor);
 		Assert.assertEquals("2,1",sensorService.getSensor(sensor.getId()).getLocation());
 
-        Monitor monitor=new Monitor(1l,"[1]","10","maocaoqiu@gmail.com",1000000,false);
+        Monitor monitor=new Monitor(1l,"[1]","10","maocaoqiu@gmail.com",1000000,false,"!,20,25");
         monitorService.addMonitor(monitor);
     }
 

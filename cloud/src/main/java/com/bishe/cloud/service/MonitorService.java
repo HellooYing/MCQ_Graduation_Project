@@ -22,9 +22,11 @@ public interface MonitorService {
 
     List<Monitor> getAll();
 
-    boolean doMonitor(long id);
+    boolean doMonitor(Long id);
 
-    boolean undoMonitor(long id);
+    boolean undoMonitor(Long id);
 
     Map<String, String> toMap(Monitor monitor);
+
+    String getUrl(Long id);
 }
