@@ -89,6 +89,7 @@ public class MonitorServiceImpl implements MonitorService {
         map.put("time",monitor.getTime());
         map.put("emails",monitor.getEmails());
         map.put("sync_num",monitor.getSyncNum().toString());
+        map.put("abnormal",monitor.getAbnormal());
         return map;
     }
 

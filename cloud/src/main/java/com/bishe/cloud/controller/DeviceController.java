@@ -96,7 +96,7 @@ public class DeviceController {
         } catch (Exception e) {
             logger.error("显示全部传感器信息错误" + e.getMessage());
         }
-        return "home";
+        return "test";
     }
 
     @RequestMapping(path = {"/sensorType"}, method = {RequestMethod.GET,RequestMethod.POST})

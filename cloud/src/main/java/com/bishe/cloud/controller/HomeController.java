@@ -1,7 +1,7 @@
 package com.bishe.cloud.controller;
 
 import com.bishe.cloud.model.HostHolder;
-import com.bishe.cloud.service.UserService;
+import com.bishe.cloud.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +17,50 @@ import javax.annotation.Resource;
 public class HomeController {
     @Resource
     UserService userService;
-
+    @Resource
+    ResponseService responseService;
+    @Resource
+    PiService piService;
+    @Resource
+    SensorService sensorService;
+    @Resource
+    MonitorService monitorService;
     @Resource
     HostHolder hostHolder;
+
+    @RequestMapping(path = {"/piget"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String getPi(Model model) {
+        model.addAttribute("pis",piService.getAll());
+        return "getPi";
+    }
+
+    @RequestMapping(path = {"/responseget"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String getResponse(Model model) {
+        model.addAttribute("responses",responseService.getAllDevice());
+        return "getResponse";
+    }
+
+    @RequestMapping(path = {"/sensorget"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String getSensor(Model model) {
+        model.addAttribute("sensors",sensorService.getAllSensor());
+        return "getSensor";
+    }
+
+    @RequestMapping(path = {"/monitorget"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String getMonitor(Model model) {
+        model.addAttribute("monitors",monitorService.getAll());
+        return "getMonitor";
+    }
 
     @RequestMapping(path = {"/", "/index"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String index(Model model,@RequestParam(value = "pop", defaultValue = "0") int pop) {
         model.addAttribute("pop", pop);
-        return "home";
+
+        model.addAttribute("sensors",sensorService.getAllSensor());
+        model.addAttribute("sensorData",sensorService.getAllRecord());
+        model.addAttribute("pis",piService.getAll());
+        model.addAttribute("monitors",monitorService.getAll());
+        return "test";
     }
 
     @RequestMapping(path = {"/user/{userId}"}, method = {RequestMethod.GET, RequestMethod.POST})

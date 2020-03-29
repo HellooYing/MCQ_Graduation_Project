@@ -1,0 +1,195 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sufee Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="/apple-icon.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+    <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/vendors/selectFX/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body>
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/index"> <i class="menu-icon fa fa-dashboard"></i>首页 </a>
+                </li>
+                <h3 class="menu-title">设备管理</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>树莓派</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/piget">查看树莓派</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="/piadd">添加树莓派</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="/pichange">修改树莓派</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children active dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>传感器</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-table"></i><a href="/sensorget">查看传感器</a></li>
+                        <li><i class="fa fa-table"></i><a href="/sensoradd">添加传感器</a></li>
+                        <li><i class="fa fa-table"></i><a href="/sensorchange">修改传感器</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>响应设备</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th"></i><a href="/responseget">查看响应设备</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="/responseadd">添加响应设备</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="/responsechange">修改响应设备</a></li>
+                    </ul>
+                </li>
+
+                <h3 class="menu-title">监控管理</h3><!-- /.menu-title -->
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>监控计划</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-fort-awesome"></i><a href="/monitorget">查看监控计划</a></li>
+                        <li><i class="menu-icon ti-themify-logo"></i><a href="/monitoradd">添加监控计划</a></li>
+                        <li><i class="menu-icon ti-themify-logo"></i><a href="/monitorchange">修改监控计划</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/dataget"> <i class="menu-icon ti-email"></i>查看监控数据 </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside><!-- /#left-panel -->
+
+<div id="right-panel" class="right-panel">
+
+    <header id="header" class="header">
+        <div class="header-menu">
+            <div class="col-sm-7">
+                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">传感器管理</strong>
+                        </div>
+                        <div class="card-body">
+                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered" style="font-size: 12px;table-layout: fixed">
+                                <thead>
+                                <tr>
+                                    <th style="vertical-align: middle;padding-right: 22px">id</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">传感器类型</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">归属仓库</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">边缘设备</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">坐标</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr  th:each="sensor : ${sensors}">
+                                    <td th:text="${sensor.id}" style="vertical-align: middle;font-weight:400"></td>
+                                    <td th:text="${sensor.sensorType}" style="vertical-align: middle;font-weight:400"></td>
+                                    <td th:text="${sensor.warehouseId}+'s'" style="vertical-align: middle;font-weight:400"></td>
+                                    <th th:text="${sensor.piId}" style="vertical-align: middle;font-weight:400"></th>
+                                    <th th:text="${sensor.location}" style="vertical-align: middle;font-weight:400"></th>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+
+
+</div><!-- /#right-panel -->
+
+<!-- Right Panel -->
+
+
+<script src="/vendors/jquery/dist/jquery.min.js"></script>
+<script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
+<script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/assets/js/main.js"></script>
+
+
+<script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="/vendors/jszip/dist/jszip.min.js"></script>
+<script src="/vendors/pdfmake/build/pdfmake.min.js"></script>
+<script src="/vendors/pdfmake/build/vfs_fonts.js"></script>
+<script src="/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<script src="/assets/js/init-scripts/data-table/datatables-init.js"></script>
+<script>
+    function timestampFormat( timestamp ) {
+        function zeroize( num ) {
+            return (String(num).length == 1 ? '0' : '') + num;
+        }
+
+        var curTimestamp = parseInt(new Date().getTime() / 1000); //当前时间戳
+        var timestampDiff = curTimestamp - timestamp; // 参数时间戳与当前时间戳相差秒数
+
+        var curDate = new Date( curTimestamp * 1000 ); // 当前时间日期对象
+        var tmDate = new Date( timestamp * 1000 ); // 参数时间戳转换成的日期对象
+
+        var Y = tmDate.getFullYear(), m = tmDate.getMonth() + 1, d = tmDate.getDate();
+        var H = tmDate.getHours(), i = tmDate.getMinutes(), s = tmDate.getSeconds();
+
+        if ( timestampDiff < 60 ) { // 一分钟以内
+            return "刚刚";
+        } else if( timestampDiff < 3600 ) { // 一小时前之内
+            return Math.floor( timestampDiff / 60 ) + "分钟前";
+        } else if ( curDate.getFullYear() == Y && curDate.getMonth()+1 == m && curDate.getDate() == d ) {
+            return '今天' + zeroize(H) + ':' + zeroize(i);
+        } else {
+            var newDate = new Date( (curTimestamp - 86400) * 1000 ); // 参数中的时间戳加一天转换成的日期对象
+            if ( newDate.getFullYear() == Y && newDate.getMonth()+1 == m && newDate.getDate() == d ) {
+                return '昨天' + zeroize(H) + ':' + zeroize(i);
+            } else if ( curDate.getFullYear() == Y ) {
+                return zeroize(m) + '月' + zeroize(d) + '日 ' + zeroize(H) + ':' + zeroize(i);
+            } else {
+                return Y + '年' + zeroize(m) + '月' + zeroize(d) + '日 ' + zeroize(H) + ':' + zeroize(i);
+            }
+        }
+    }
+</script>
+
+</body>
+
+</html>
