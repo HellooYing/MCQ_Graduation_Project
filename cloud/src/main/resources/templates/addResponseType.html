@@ -1,7 +1,5 @@
 <!doctype html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
-<!--<![endif]-->
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,10 +16,12 @@
     <link rel="stylesheet" href="/vendors/themify-icons/css/themify-icons.css">
     <link rel="stylesheet" href="/vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="/vendors/selectFX/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 
     <link rel="stylesheet" href="/assets/css/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+
 
 </head>
 
@@ -83,8 +83,8 @@
         </div><!-- /.navbar-collapse -->
     </nav>
 </aside>
-<div id="right-panel" class="right-panel">
 
+<div id="right-panel" class="right-panel">
     <header id="header" class="header">
         <div class="header-menu">
             <div class="col-sm-7">
@@ -96,99 +96,53 @@
     <div class="content mt-3">
         <div class="animated fadeIn">
             <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <div th:if=" ${status} ==1" class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                        <span class="badge badge-pill badge-success">Success</span>
+                        添加响应外设类型成功
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 
-                <div class="col-md-12">
+                    <div th:if=" ${status} ==0" class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                        <span class="badge badge-pill badge-danger">Failed</span>
+                        添加响应外设类型失败！
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">响应设备管理</strong>
+                            新增响应外设类型
                         </div>
-                        <div class="card-body">
-                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered" style="font-size: 12px;table-layout: fixed">
-                                <thead>
-                                <tr>
-                                    <th style="vertical-align: middle;padding-right: 22px">id</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">外设类型</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">归属仓库</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">边缘设备</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">坐标</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="response : ${responses}">
-                                    <td th:text="${response.id}" style="vertical-align: middle;font-weight:400"></td>
-                                    <td th:text="${response.responseDeviceType}" style="vertical-align: middle;font-weight:400"></td>
-                                    <td th:text="${response.warehouseId}+'s'" style="vertical-align: middle;font-weight:400"></td>
-                                    <th th:text="${response.piId}" style="vertical-align: middle;font-weight:400"></th>
-                                    <th th:text="${response.location}" style="vertical-align: middle;font-weight:400"></th>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="card-body card-block">
+                            <form action="/addResponseDeviceType" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="name" class=" form-control-label">响应外设类型名</label></div>
+                                    <div class="col-12 col-md-9"><input type="text" id="name" name="name" placeholder="如：蜂鸣器" class="form-control"></div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    提交
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
-
-
             </div>
-        </div><!-- .animated -->
-    </div><!-- .content -->
-
-
-</div><!-- /#right-panel -->
-
-<!-- Right Panel -->
+        </div>
+    </div>
+</div>
 
 
 <script src="/vendors/jquery/dist/jquery.min.js"></script>
 <script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
+
+<script src="/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+
+
 <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/assets/js/main.js"></script>
-
-
-<script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-<script src="/vendors/jszip/dist/jszip.min.js"></script>
-<script src="/vendors/pdfmake/build/pdfmake.min.js"></script>
-<script src="/vendors/pdfmake/build/vfs_fonts.js"></script>
-<script src="/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="/vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-<script src="/assets/js/init-scripts/data-table/datatables-init.js"></script>
-<script>
-    function timestampFormat( timestamp ) {
-        function zeroize( num ) {
-            return (String(num).length == 1 ? '0' : '') + num;
-        }
-
-        var curTimestamp = parseInt(new Date().getTime() / 1000); //当前时间戳
-        var timestampDiff = curTimestamp - timestamp; // 参数时间戳与当前时间戳相差秒数
-
-        var curDate = new Date( curTimestamp * 1000 ); // 当前时间日期对象
-        var tmDate = new Date( timestamp * 1000 ); // 参数时间戳转换成的日期对象
-
-        var Y = tmDate.getFullYear(), m = tmDate.getMonth() + 1, d = tmDate.getDate();
-        var H = tmDate.getHours(), i = tmDate.getMinutes(), s = tmDate.getSeconds();
-
-        if ( timestampDiff < 60 ) { // 一分钟以内
-            return "刚刚";
-        } else if( timestampDiff < 3600 ) { // 一小时前之内
-            return Math.floor( timestampDiff / 60 ) + "分钟前";
-        } else if ( curDate.getFullYear() == Y && curDate.getMonth()+1 == m && curDate.getDate() == d ) {
-            return '今天' + zeroize(H) + ':' + zeroize(i);
-        } else {
-            var newDate = new Date( (curTimestamp - 86400) * 1000 ); // 参数中的时间戳加一天转换成的日期对象
-            if ( newDate.getFullYear() == Y && newDate.getMonth()+1 == m && newDate.getDate() == d ) {
-                return '昨天' + zeroize(H) + ':' + zeroize(i);
-            } else if ( curDate.getFullYear() == Y ) {
-                return zeroize(m) + '月' + zeroize(d) + '日 ' + zeroize(H) + ':' + zeroize(i);
-            } else {
-                return Y + '年' + zeroize(m) + '月' + zeroize(d) + '日 ' + zeroize(H) + ':' + zeroize(i);
-            }
-        }
-    }
-</script>
-
 </body>
-
 </html>

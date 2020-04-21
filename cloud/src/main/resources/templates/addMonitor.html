@@ -1,0 +1,192 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sufee Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="/apple-icon.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+    <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="/vendors/selectFX/css/cs-skin-elastic.css">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+
+
+</head>
+
+<body>
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/index"> <i class="menu-icon fa fa-dashboard"></i>首页 </a>
+                </li>
+                <h3 class="menu-title">设备管理</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>树莓派</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><a href="/piget">查看树莓派</a></li>
+
+                        <li><a href="/pichange">修改树莓派</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children active dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-fire"></i>传感器</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><a href="/sensorget">查看传感器</a></li>
+                        <li><a href="/sensortypeadd">添加传感器类型</a></li>
+                        <li><a href="/sensorchange">修改传感器</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-paper-plane"></i>响应设备</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><a href="/responseget">查看响应设备</a></li>
+                        <li><a href="/responsetypeadd">添加响应设备类型</a></li>
+                        <li><a href="/responsechange">修改响应设备</a></li>
+                    </ul>
+                </li>
+
+                <h3 class="menu-title">监控管理</h3><!-- /.menu-title -->
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bars"></i>监控计划</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><a href="/monitorget">查看监控计划</a></li>
+                        <li><a href="/monitoradd">添加监控计划</a></li>
+                        <li><a href="/monitorchange">修改监控计划</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/dataget"> <i class="menu-icon fa fa-bar-chart"></i>查看监控数据 </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
+
+<div id="right-panel" class="right-panel">
+    <header id="header" class="header">
+        <div class="header-menu">
+            <div class="col-sm-7">
+                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <div th:if=" ${status} ==1" class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                        <span class="badge badge-pill badge-success">Success</span>
+                        添加监控计划成功
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:if=" ${status} ==0" class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                        <span class="badge badge-pill badge-danger">Failed</span>
+                        添加监控计划失败，未知异常
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:if=" ${status} ==2" class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                        <span class="badge badge-pill badge-danger">Failed</span>
+                        添加监控计划失败，边缘设备异常
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            新增监控计划
+                        </div>
+                        <div class="card-body card-block">
+                            <form action="/addMonitor" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="sensorId" class=" form-control-label">传感器</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="sensorId" id="sensorId" class="form-control">
+                                            <option th:each="sensor:${sensors}" th:value="${sensor.id}" th:text="'边缘设备'+${sensor.piId}+'-'+${sensor.sensorType}"></option>
+                                        </select>
+                                        <small class="form-text text-muted">"边缘设备1-1"意为id为1的边缘设备上类型为1的传感器</small>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="responseDeviceList" class=" form-control-label">响应外设id列表</label></div>
+                                    <div class="col-12 col-md-9"><input type="text" id="responseDeviceList" name="responseDeviceList" placeholder="如：[1,2]" class="form-control">
+                                        <small class="form-text text-muted">当监控数据异常时，哪些响应设备会启动</small>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="time" class=" form-control-label">任务周期</label></div>
+                                    <div class="col-12 col-md-9"><input type="text" id="time" name="time" placeholder="如：60" class="form-control">
+                                        <small class="form-text text-muted">每多少秒取一次传感器数据</small>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="emails" class=" form-control-label">通知邮箱列表</label></div>
+                                    <div class="col-12 col-md-9"><input type="text" id="emails" name="emails" placeholder="如：[maocaoqiu@gmail.com]" class="form-control">
+                                        <small class="form-text text-muted">监控数据异常时给哪些邮箱发邮件</small>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="sync_num" class=" form-control-label">批量同步数量</label></div>
+                                    <div class="col-12 col-md-9"><input type="text" id="sync_num" name="sync_num" placeholder="如：0" class="form-control">
+                                        <small class="form-text text-muted">积累多少条监控记录同步一次，0代表不同步</small>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="abnormal" class=" form-control-label">异常表达式</label></div>
+                                    <div class="col-12 col-md-9"><input type="text" id="abnormal" name="abnormal" placeholder="如：!,20,25" class="form-control">
+                                        <small class="form-text text-muted">异常表达式为"0"或"1"，当监控数据值为0或1时异常告警</small>
+                                        <small class="form-text text-muted">异常表达式形如"50,100"，则监控数据值在50~100范围中时异常告警</small>
+                                        <small class="form-text text-muted">异常表达式形如"!,50,100",则监控数据值不在50-100范围内时异常告警</small>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    提交
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/vendors/jquery/dist/jquery.min.js"></script>
+<script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
+
+<script src="/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+
+
+<script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

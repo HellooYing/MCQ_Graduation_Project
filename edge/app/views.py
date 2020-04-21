@@ -49,12 +49,12 @@ def monitoring(monitor):
     # 开始循环监控
     i=0
     while True:
-        # 如果该监控的id不在"应运行的监控列表"中，则返回
-        if monitor.id not in alive_monitor:
+        # 如果该监控的传感器id不在"应运行的监控列表"中，则返回
+        if monitor.sensorId not in alive_monitor:
             print("终止监控"+str(monitor.id)+"成功")
             return
-        # 举例：假设监控id是1，下面是执行sensor.m1.f()函数，将结果存到result中。
-        func = eval('sensor.m'+str(monitor.id)+'.f')
+        # 举例：假设监控对应传感器id是1，下面是执行sensor.1.f()函数，将结果存到result中。
+        func = eval('sensor.'+str(monitor.id)+'.f')
         result=func()
         # 若f()返回失败则忽略本次执行，之所以这样写是因为传感器硬件可能经常返回奇怪的结果。
         # 如果后续有需要，可以计算硬件失败次数来避免硬件确实坏了一直返回不合法的值的情况，但暂时不作考虑。
@@ -111,7 +111,7 @@ def submit(monitor):
 def doMonitor(request):
     monitorId=request.POST.get("id")
     monitor=Monitor.objects.get(id=monitorId)
-    alive_monitor.append(int(monitor.id))
+    alive_monitor.append(int(monitor.sensorId))
     try:
         _thread.start_new_thread( monitoring, (monitor, ))
     except:
@@ -123,10 +123,11 @@ def doMonitor(request):
 
 def undoMonitor(request):
     monitorId=request.POST.get("id")
+    monitor=Monitor.objects.get(id=monitorId)
     response = HttpResponse()
     response.status_code = 200
-    if int(monitorId) in alive_monitor:
-        alive_monitor.remove(int(monitorId))
+    if int(monitor.sensorId) in alive_monitor:
+        alive_monitor.remove(int(monitor.sensorId))
     response.content = 'ok'
     return response
     
@@ -156,7 +157,7 @@ def addPi(request):
     payload={'warehouseId': warehouseId,'location':location,'url':pi.url}
     r = requests.post(url+'/addPi', data=payload)
     if r.status_code==200 and r.text!='failed':
-        pi.id=r.text
+        pi.id=int(r.text)
         global piId
         piId=pi.id
         pi.save()
@@ -165,21 +166,27 @@ def addPi(request):
         return response
     else:
         response.status_code = r.status_code
-        response.content = 'fail'
+        response.content = 'failed'
         return response
     
 def addResponseDevice(request):
     response = HttpResponse()
-    pis=Pi.objects.all()
-    piId=-1
-    for pi in pis:
-        piId=pi.id
+    # 在内存中的全局变量获取仓库id和派id
+    global piId
+    global warehouseId
+    # 全局变量没存的话，尝试从数据库获取
     if piId==-1:
-        response.status_code = 400
-        response.content = '边缘设备未注册！无法在此边缘设备上添加响应外设'
-        return response
+        pis=Pi.objects.all()
+        for pi in pis:
+            piId=pi.id
+            warehouseId=pi.warehouseId
+        # 数据库中也没有，则返回设备未注册错误
+        if piId==-1:
+            response.status_code = 400
+            response.content = '边缘设备未注册！无法在此边缘设备上添加外设'
+            return response
     responseDeviceName = request.POST.get("responseDeviceName")
-    warehouseId = request.POST.get("warehouseId")
+    warehouseId = warehouseId
     location = request.POST.get("location")
     rd=ResponseDevice()
     rd.responseDeviceName=responseDeviceName
@@ -189,43 +196,52 @@ def addResponseDevice(request):
     payload={'responseDeviceName':responseDeviceName,'warehouseId': warehouseId,'location':location,'piId':piId}
     r = requests.post(url+'/addResponseDevice', data=payload)
     if r.status_code==200 and r.text!='failed':
-        rd.id=r.text
+        rd.id=int(r.text)
         rd.save()
         response.status_code = 200
-        response.content = 'ok'
+        response.content = rd.id
         return response
     else:
         response.status_code = r.status_code
-        response.content = 'fail'
+        response.content = 'failed'
         return response
     
 def addSensor(request):
     response = HttpResponse()
-    pis=Pi.objects.all()
-    piId=-1
-    for pi in pis:
-        piId=pi.id
+    # 在内存中的全局变量获取仓库id和派id
+    global piId
+    global warehouseId
+    # 全局变量没存的话，尝试从数据库获取
     if piId==-1:
-        response.status_code = 400
-        response.content = '边缘设备未注册！无法在此边缘设备上添加传感器'
-        return response
+        pis=Pi.objects.all()
+        for pi in pis:
+            piId=pi.id
+            warehouseId=pi.warehouseId
+        # 数据库中也没有，则返回设备未注册错误
+        if piId==-1:
+            response.status_code = 400
+            response.content = '边缘设备未注册！无法在此边缘设备上添加传感器'
+            return response
     sensorName = request.POST.get("sensorName")
-    warehouseId = request.POST.get("warehouseId")
+    # 这个坐标是传感器坐标，而不是树莓派坐标
     location = request.POST.get("location")
+    # 创建传感器对象
     sensor=Sensor()
     sensor.sensorName=sensorName
     sensor.warehouseId=warehouseId
     sensor.piId=piId
     sensor.location=location
+    # 将传感器同步到云端，获取传感器号
     payload={'sensorName':sensorName,'warehouseId': warehouseId,'location':location,'piId':piId}
     r = requests.post(url+'/addSensor', data=payload)
     if r.status_code==200 and r.text!='failed':
-        sensor.id=r.text
+        sensor.id=int(r.text)
         sensor.save()
         response.status_code = 200
-        response.content = 'ok'
+        # 云端创建传感器成功，则将传感器id返回，下一步自动生成传感器驱动程序时会用到这个id
+        response.content = sensor.id
         return response
     else:
         response.status_code = r.status_code
-        response.content = 'fail'
+        response.content = 'failed'
         return response

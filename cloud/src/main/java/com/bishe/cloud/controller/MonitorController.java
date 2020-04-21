@@ -52,8 +52,8 @@ public class MonitorController {
             }
         } catch (Exception e) {
             logger.error("关闭监控任务错误" + e.getMessage());
+            return "failed";
         }
-        return "redirect:/home";
     }
 
     @RequestMapping(path = {"/doMonitor"}, method = {RequestMethod.GET, RequestMethod.POST})
@@ -71,21 +71,23 @@ public class MonitorController {
             }
         } catch (Exception e) {
             logger.error("启动监控任务错误" + e.getMessage());
+            return "failed";
         }
-        return "redirect:/home";
     }
 
     @RequestMapping(path = {"/deleteMonitor"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
     public String deleteMonitor(@RequestParam("id") Long id) {
         try {
             monitorService.deleteMonitor(id);
         } catch (Exception e) {
             logger.error("删除监控任务错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/updateMonitor"}, method = {RequestMethod.POST})
+    @ResponseBody
     public String updateMonitor(@RequestParam("id") Long id,
                                 @RequestParam("sensorId") Long sensorId,
                                 @RequestParam("responseDeviceList") String responseDeviceList,
@@ -101,12 +103,12 @@ public class MonitorController {
         } catch (Exception e) {
             logger.error("修改监控任务错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/addMonitor"}, method = {RequestMethod.POST})
-    @ResponseBody
-    public String addMonitor(@RequestParam("sensorId") Long sensorId,
+    public String addMonitor(Model model,
+                             @RequestParam("sensorId") Long sensorId,
                              @RequestParam("responseDeviceList") String responseDeviceList,
                              @RequestParam("time") String time,
                              @RequestParam("emails") String emails,
@@ -118,14 +120,21 @@ public class MonitorController {
             monitorService.addMonitor(monitor);
             String result = CloudUtil.sendPost("http://"+monitorService.getUrl(monitor.getId()) + "/addMonitor", monitorService.toMap(monitor));
             if (result.equals("ok")) {
-                return result;
+                // 调用成功，状态码1
+                model.addAttribute("status",1);
             } else {
                 monitorService.deleteMonitor(monitor.getId());
+                // 调用边缘设备程序失败，错误码2
+                model.addAttribute("status",2);
             }
         } catch (Exception e) {
+            // 异常，错误码0
+            model.addAttribute("status",0);
             logger.error("添加监控任务错误" + e.getMessage());
         }
-        return "failed";
+        model.addAttribute("responses",responseService.getAllDevice());
+        model.addAttribute("sensors",sensorService.getAllSensor());
+        return "addMonitor";
     }
 
     @RequestMapping(path = {"/submit"}, method = {RequestMethod.GET, RequestMethod.POST})
@@ -146,8 +155,8 @@ public class MonitorController {
             return "ok";
         } catch (Exception e) {
             logger.error("上传监控数据失败" + e.getMessage());
+            return "failed";
         }
-        return "failed";
     }
 
     @RequestMapping(path = {"/sensorDataRecord"}, method = {RequestMethod.GET, RequestMethod.POST})

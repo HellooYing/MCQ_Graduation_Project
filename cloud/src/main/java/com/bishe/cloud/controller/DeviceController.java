@@ -96,7 +96,7 @@ public class DeviceController {
         } catch (Exception e) {
             logger.error("显示全部传感器信息错误" + e.getMessage());
         }
-        return "test";
+        return "home";
     }
 
     @RequestMapping(path = {"/sensorType"}, method = {RequestMethod.GET,RequestMethod.POST})
@@ -177,14 +177,15 @@ public class DeviceController {
     }
 
     @RequestMapping(path = {"/addSensorType"}, method = {RequestMethod.POST})
-    public String addSensorType(@RequestParam("name") String name,@RequestParam("valueType") Integer valueType) {
+    public String addSensorType(Model model,@RequestParam("name") String name,@RequestParam("valueType") Integer valueType) {
         try {
             sensorService.addSensorType(new SensorType(name,valueType));
-
+            model.addAttribute("status",1);
         } catch (Exception e) {
             logger.error("添加传感器类型错误" + e.getMessage());
+            model.addAttribute("status",0);
         }
-        return "redirect:/home";
+        return "addSensorType";
     }
 
     @RequestMapping(path = {"/addResponseDevice"}, method = {RequestMethod.POST})
@@ -209,66 +210,74 @@ public class DeviceController {
     }
 
     @RequestMapping(path = {"/addResponseDeviceType"}, method = {RequestMethod.POST})
-    public String addResponseDeviceType(@RequestParam("name") String name) {
+    public String addResponseDeviceType(Model model,@RequestParam("name") String name) {
         try {
             responseService.addResponseDeviceType(new ResponseDeviceType(name));
+            model.addAttribute("status",1);
         } catch (Exception e) {
             logger.error("添加响应外设类型错误" + e.getMessage());
+            model.addAttribute("status",0);
         }
-        return "redirect:/home";
+        return "addResponseType";
     }
 
     @RequestMapping(path = {"/deletePi/{piId}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
     public String deletePi(@PathVariable("piId") long piId) {
         try {
             piService.deletePi(piId);
         } catch (Exception e) {
             logger.error("删除边缘设备错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/deleteSensor/{sensorId}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
     public String deleteSensor(@PathVariable("sensorId") long sensorId) {
         try {
             sensorService.deleteSensor(sensorId);
         } catch (Exception e) {
             logger.error("删除传感器错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/deleteSensorType/{sensorType}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
     public String deleteSensorType(@PathVariable("sensorType") int sensorType) {
         try {
             sensorService.deleteSensorType(sensorType);
         } catch (Exception e) {
             logger.error("删除传感器类型错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/deleteResponseDevice"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
     public String deleteResponseDevice(@PathVariable("responseDeviceId") long responseDeviceId) {
         try {
             responseService.deleteResponseDevice(responseDeviceId);
         } catch (Exception e) {
             logger.error("删除响应外设错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/deleteResponseDeviceType"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
     public String deleteResponseDeviceType(@PathVariable("responseDeviceType") int responseDeviceType) {
         try {
             responseService.deleteResponseDeviceType(responseDeviceType);
         } catch (Exception e) {
             logger.error("删除响应外设类型错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/updatePi"}, method = {RequestMethod.POST})
+    @ResponseBody
     public String updatePi(@RequestParam("piId") long piId,
                            @RequestParam("warehouseId") long warehouseId,
                            @RequestParam("location") String location) {
@@ -277,10 +286,11 @@ public class DeviceController {
         } catch (Exception e) {
             logger.error("更新边缘设备错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/updateSensor"}, method = {RequestMethod.POST})
+    @ResponseBody
     public String updateSensor(@RequestParam("sensorId") long sensorId,
                                @RequestParam("sensorType") int sensorType,
                                @RequestParam("warehouseId") long warehouseId,
@@ -291,10 +301,11 @@ public class DeviceController {
         } catch (Exception e) {
             logger.error("更新传感器错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/updateSensorType"}, method = {RequestMethod.POST})
+    @ResponseBody
     public String updateSensorType(@RequestParam("sensorType") int sensorType,
                                    @RequestParam("name") String name,
                                    @RequestParam("valueType") int valueType) {
@@ -303,10 +314,11 @@ public class DeviceController {
         } catch (Exception e) {
             logger.error("更新传感器类型错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/updateResponseDevice"}, method = {RequestMethod.POST})
+    @ResponseBody
     public String updateResponseDevice(@RequestParam("responseDeviceId") long responseDeviceId,
                                        @RequestParam("responseDeviceType") int responseDeviceType,
                                        @RequestParam("warehouseId") long warehouseId,
@@ -317,10 +329,11 @@ public class DeviceController {
         } catch (Exception e) {
             logger.error("更新响应外设错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
     @RequestMapping(path = {"/updateResponseDeviceType"}, method = {RequestMethod.POST})
+    @ResponseBody
     public String updateResponseDeviceType(@RequestParam("deviceType") int deviceType,
                                            @RequestParam("name") String name) {
         try {
@@ -328,7 +341,7 @@ public class DeviceController {
         } catch (Exception e) {
             logger.error("更新响应外设类型错误" + e.getMessage());
         }
-        return "redirect:/home";
+        return "ok";
     }
 
 

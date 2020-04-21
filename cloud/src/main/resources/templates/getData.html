@@ -1,6 +1,5 @@
 <!doctype html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
-<!--<![endif]-->
 
 <head>
     <meta charset="utf-8">
@@ -100,34 +99,30 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">监控任务管理</strong>
+                            <strong class="card-title">查看监控数据</strong>
                         </div>
                         <div class="card-body">
                             <table id="bootstrap-data-table-export" class="table table-striped table-bordered" style="font-size: 12px;table-layout: fixed">
                                 <thead>
                                 <tr>
-                                    <th style="vertical-align: middle;padding-right: 22px">任务id</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">传感器</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">任务周期</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">异常表达式</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">响应设备</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">响应邮件</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">批量同步</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">id</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">传感器类型</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">传感器id</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">仓库id</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">值</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">是否正常</th>
                                     <th style="vertical-align: middle;padding-right: 22px">创建时间</th>
-                                    <th style="vertical-align: middle;padding-right: 22px">是否启动</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr  th:each="monitor : ${monitors}">
-                                    <td th:text="${monitor.id}" style="vertical-align: middle;font-weight:400"></td>
-                                    <td th:text="${monitor.sensorId}" style="vertical-align: middle;font-weight:400"></td>
-                                    <td th:text="${monitor.time}+'s'" style="vertical-align: middle;font-weight:400"></td>
-                                    <th th:text="${monitor.abnormal}" style="vertical-align: middle;font-weight:400"></th>
-                                    <th th:text="${monitor.responseDeviceList}" style="vertical-align: middle;font-weight:400"></th>
-                                    <th th:text="${monitor.emails}" style="vertical-align: middle;font-weight:400"></th>
-                                    <th th:text="${monitor.syncNum}" style="vertical-align: middle;font-weight:400"></th>
-                                    <th th:text="${#dates.format(monitor.createTime, 'yyyy-MM-dd')}" style="vertical-align: middle;font-weight:400"></th>
-                                    <th th:text="${monitor.isUsing}" style="vertical-align: middle;font-weight:400"></th>
+                                <tr  th:each="data : ${datas}">
+                                    <td th:text="${data.id}" style="vertical-align: middle;font-weight:400"></td>
+                                    <td th:text="${data.sensorType}+'s'" style="vertical-align: middle;font-weight:400"></td>
+                                    <td th:text="${data.sensorId}+'s'" style="vertical-align: middle;font-weight:400"></td>
+                                    <td th:text="${data.warehouseId}+'s'" style="vertical-align: middle;font-weight:400"></td>
+                                    <th th:text="${data.value}" style="vertical-align: middle;font-weight:400"></th>
+                                    <th th:text="${data.normal}" style="vertical-align: middle;font-weight:400"></th>
+                                    <td th:text="${data.createTime}+'s'" style="vertical-align: middle;font-weight:400"></td>
                                 </tr>
                                 </tbody>
                             </table>

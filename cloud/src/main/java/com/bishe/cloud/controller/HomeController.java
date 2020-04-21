@@ -2,7 +2,6 @@ package com.bishe.cloud.controller;
 
 import com.bishe.cloud.model.HostHolder;
 import com.bishe.cloud.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +26,29 @@ public class HomeController {
     MonitorService monitorService;
     @Resource
     HostHolder hostHolder;
+
+    @RequestMapping(path = {"/monitoradd"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String addmonitor(Model model) {
+        model.addAttribute("responses",responseService.getAllDevice());
+        model.addAttribute("sensors",sensorService.getAllSensor());
+        return "addMonitor";
+    }
+
+    @RequestMapping(path = {"/responsetypeadd"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String addResponseDeviceType(Model model) {
+        return "addResponseType";
+    }
+
+    @RequestMapping(path = {"/sensortypeadd"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String addSensorType(Model model) {
+        return "addSensorType";
+    }
+
+    @RequestMapping(path = {"/dataget"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String getData(Model model) {
+        model.addAttribute("datas",sensorService.getAllRecord());
+        return "getData";
+    }
 
     @RequestMapping(path = {"/piget"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String getPi(Model model) {
