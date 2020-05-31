@@ -22,11 +22,11 @@
     <link rel="stylesheet" href="/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 
     <link rel="stylesheet" href="/assets/css/style.css">
-
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
 
 <body>
-<aside id="left-panel" class="left-panel">
+<aside id="left-panel" class="left-panel" style="padding-right: 40px;">
     <nav class="navbar navbar-expand-sm navbar-default">
 
         <div class="navbar-header">
@@ -45,8 +45,6 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>树莓派</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><a href="/piget">查看树莓派</a></li>
-
-                        <li><a href="/pichange">修改树莓派</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children active dropdown">
@@ -54,7 +52,6 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><a href="/sensorget">查看传感器</a></li>
                         <li><a href="/sensortypeadd">添加传感器类型</a></li>
-                        <li><a href="/sensorchange">修改传感器</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
@@ -62,7 +59,6 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><a href="/responseget">查看响应设备</a></li>
                         <li><a href="/responsetypeadd">添加响应设备类型</a></li>
-                        <li><a href="/responsechange">修改响应设备</a></li>
                     </ul>
                 </li>
 
@@ -73,11 +69,14 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><a href="/monitorget">查看监控计划</a></li>
                         <li><a href="/monitoradd">添加监控计划</a></li>
-                        <li><a href="/monitorchange">修改监控计划</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="/dataget"> <i class="menu-icon fa fa-bar-chart"></i>查看监控数据 </a>
+                 <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bars"></i>查看监控数据</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><a href="/data2get">表格</a></li>
+                        <li><a href="/dataget">图</a></li>
+                    </ul>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -87,7 +86,16 @@
 
     <header id="header" class="header">
         <div class="header-menu">
-            <div class="col-sm-7">
+            <div>
+                <nav class="user-area dropdown float-right">
+                    <ul th:if="${user}" class="nav navbar-nav navbar-right">
+                        <li class="float-right"><span th:text="'您好，'+${user.name}"></span></li>
+                        <li class="float-right"><a href="/logout/">退出</a></li>
+                    </ul>
+                    <ul th:unless="${user}" class="nav navbar-nav navbar-right">
+                        <li class="js-login float-right"><a href="javascript:void(0);">登陆</a></li>
+                    </ul>
+                </nav>
                 <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
             </div>
         </div>
@@ -155,6 +163,18 @@
 <script src="/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
 <script src="/vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 <script src="/assets/js/init-scripts/data-table/datatables-init.js"></script>
+<script type="text/javascript" src="/scripts/jquery.js"></script>
+<script type="text/javascript" src="/scripts/main/base/base.js"></script>
+<script type="text/javascript" src="/scripts/main/base/util.js"></script>
+<script type="text/javascript" src="/scripts/main/base/event.js"></script>
+<script type="text/javascript" src="/scripts/main/base/upload.js"></script>
+<script type="text/javascript" src="/scripts/main/component/component.js"></script>
+<script type="text/javascript" src="/scripts/main/component/popup.js"></script>
+<script type="text/javascript" src="/scripts/main/component/popupLogin.js"></script>
+<script type="text/javascript" src="/scripts/main/component/upload.js"></script>
+<script type="text/javascript" src="/scripts/main/component/popupUpload.js"></script>
+<script type="text/javascript" src="/scripts/main/util/action.js"></script>
+<script type="text/javascript" src="/scripts/main/site/home.js"></script>
 <script>
     function timestampFormat( timestamp ) {
         function zeroize( num ) {

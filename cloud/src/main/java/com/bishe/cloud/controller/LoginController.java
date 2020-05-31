@@ -56,7 +56,6 @@ public class LoginController {
                         @RequestParam(value = "rember", defaultValue = "0") int remember,
                         HttpServletResponse response) {
         try {
-            System.out.println(username);
             Map<String, Object> map = userService.login(username, password);
             if (map.containsKey("ticket")) {
                 addCookie(map, remember, response);

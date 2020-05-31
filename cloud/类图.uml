@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.bishe.cloud.model.Monitor</OriginalElement>
+  <nodes>
+    <node x="0.0" y="299.5">com.bishe.cloud.model.SensorDataRecord</node>
+    <node x="1906.0" y="368.5">com.bishe.cloud.model.Sensor</node>
+    <node x="1378.5" y="0.0">javax.persistence.Table</node>
+    <node x="2434.0" y="426.0">com.bishe.cloud.model.SensorType</node>
+    <node x="735.0" y="368.5">com.bishe.cloud.model.ResponseRecord</node>
+    <node x="2210.0" y="391.5">com.bishe.cloud.model.Pi</node>
+    <node x="412.0" y="460.5">com.bishe.cloud.model.ResponseDeviceType</node>
+    <node x="1096.0" y="196.0">com.bishe.cloud.model.Monitor</node>
+    <node x="1548.0" y="368.5">com.bishe.cloud.model.ResponseDevice</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.bishe.cloud.model.SensorType" target="javax.persistence.Table">
+      <point x="0.0" y="-244.0" />
+      <point x="2561.5" y="146.0" />
+      <point x="1633.5" y="146.0" />
+      <point x="119.0" y="63.0" />
+    </edge>
+    <edge source="com.bishe.cloud.model.Sensor" target="javax.persistence.Table">
+      <point x="0.0" y="-301.5" />
+      <point x="2048.0" y="166.0" />
+      <point x="1565.5" y="166.0" />
+      <point x="51.0" y="63.0" />
+    </edge>
+    <edge source="com.bishe.cloud.model.SensorDataRecord" target="javax.persistence.Table">
+      <point x="0.0" y="-370.5" />
+      <point x="196.0" y="146.0" />
+      <point x="1395.5" y="146.0" />
+      <point x="-119.0" y="63.0" />
+    </edge>
+    <edge source="com.bishe.cloud.model.Pi" target="javax.persistence.Table">
+      <point x="0.0" y="-278.5" />
+      <point x="2312.0" y="156.0" />
+      <point x="1599.5" y="156.0" />
+      <point x="85.0" y="63.0" />
+    </edge>
+    <edge source="com.bishe.cloud.model.ResponseDevice" target="javax.persistence.Table">
+      <point x="0.0" y="-301.5" />
+      <point x="1717.0" y="176.0" />
+      <point x="1531.5" y="176.0" />
+      <point x="17.0" y="63.0" />
+    </edge>
+    <edge source="com.bishe.cloud.model.ResponseRecord" target="javax.persistence.Table">
+      <point x="0.0" y="-301.5" />
+      <point x="905.5" y="166.0" />
+      <point x="1463.5" y="166.0" />
+      <point x="-51.0" y="63.0" />
+    </edge>
+    <edge source="com.bishe.cloud.model.Monitor" target="javax.persistence.Table">
+      <point x="0.0" y="-474.0" />
+      <point x="1312.0" y="176.0" />
+      <point x="1497.5" y="176.0" />
+      <point x="-17.0" y="63.0" />
+    </edge>
+    <edge source="com.bishe.cloud.model.ResponseDeviceType" target="javax.persistence.Table">
+      <point x="0.0" y="-209.5" />
+      <point x="563.5" y="156.0" />
+      <point x="1429.5" y="156.0" />
+      <point x="-85.0" y="63.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.3148763381321521" x="1344.5" y="572.0" />
+  <SelectedNodes>
+    <node>com.bishe.cloud.model.Monitor</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -49,6 +49,11 @@ public class HomeController {
         model.addAttribute("datas",sensorService.getAllRecord());
         return "getData";
     }
+    @RequestMapping(path = {"/data2get"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String getData2(Model model) {
+        model.addAttribute("datas",sensorService.getAllRecord());
+        return "getData2";
+    }
 
     @RequestMapping(path = {"/piget"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String getPi(Model model) {
@@ -82,7 +87,12 @@ public class HomeController {
         model.addAttribute("sensorData",sensorService.getAllRecord());
         model.addAttribute("pis",piService.getAll());
         model.addAttribute("monitors",monitorService.getAll());
-        return "test";
+        if(hostHolder.getUser()!=null){
+            return "getSensor";
+        }
+        else {
+            return "test";
+        }
     }
 
     @RequestMapping(path = {"/user/{userId}"}, method = {RequestMethod.GET, RequestMethod.POST})
