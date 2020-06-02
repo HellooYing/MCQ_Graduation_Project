@@ -132,9 +132,8 @@ public class MonitorController {
             model.addAttribute("status",0);
             logger.error("添加监控任务错误" + e.getMessage());
         }
-        model.addAttribute("responses",responseService.getAllDevice());
-        model.addAttribute("sensors",sensorService.getAllSensor());
-        return "addMonitor";
+        model.addAttribute("monitors",monitorService.getAll());
+        return "getMonitor";
     }
 
     @RequestMapping(path = {"/submit"}, method = {RequestMethod.GET, RequestMethod.POST})
