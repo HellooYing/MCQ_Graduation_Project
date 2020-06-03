@@ -106,6 +106,20 @@
             <div class="row">
 
                 <div class="col-md-12">
+                    <div th:if=" ${status} =='doSensor-ok'" class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                        <span class="badge badge-pill badge-success">Success</span>
+                        <span th:text="'测试传感器成功,传感器检测结果值为'+${value}"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:if=" ${status} =='doSensor-failed'" class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                        <span class="badge badge-pill badge-danger">Failed</span>
+                        测试传感器失败
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">传感器管理</strong>
@@ -119,6 +133,7 @@
                                     <th style="vertical-align: middle;padding-right: 22px">归属仓库</th>
                                     <th style="vertical-align: middle;padding-right: 22px">边缘设备</th>
                                     <th style="vertical-align: middle;padding-right: 22px">坐标</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">测试传感器</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -128,6 +143,7 @@
                                     <td th:text="${sensor.warehouseId}+'s'" style="vertical-align: middle;font-weight:400"></td>
                                     <th th:text="${sensor.piId}" style="vertical-align: middle;font-weight:400"></th>
                                     <th th:text="${sensor.location}" style="vertical-align: middle;font-weight:400"></th>
+                                    <th><a th:href="@{'/doSensor?id='+${sensor.id}}">启动</a></th>
                                 </tr>
                                 </tbody>
                             </table>

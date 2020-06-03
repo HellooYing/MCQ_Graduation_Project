@@ -106,6 +106,48 @@
             <div class="row">
 
                 <div class="col-md-12">
+                    <div th:if=" ${status} =='doMonitor-ok'" class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                        <span class="badge badge-pill badge-success">Success</span>
+                        启动监控计划成功
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:if=" ${status} =='undoMonitor-ok'" class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                        <span class="badge badge-pill badge-success">Success</span>
+                        关闭监控计划成功
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:if=" ${status} =='doMonitor-doing'" class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                        <span class="badge badge-pill badge-danger">Failed</span>
+                        监控计划已启动，无需重复操作
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:if=" ${status} =='undoMonitor-closed'" class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                        <span class="badge badge-pill badge-danger">Failed</span>
+                        监控计划已关闭，无需重复操作
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:if=" ${status} =='doMonitor-failed'" class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                        <span class="badge badge-pill badge-danger">Failed</span>
+                        启动监控计划失败
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:if=" ${status} =='undoMonitor-failed'" class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                        <span class="badge badge-pill badge-danger">Failed</span>
+                        关闭监控计划失败
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">监控任务管理</strong>
@@ -137,7 +179,7 @@
                                     <th th:text="${monitor.syncNum}" style="vertical-align: middle;font-weight:400"></th>
                                     <th th:text="${#dates.format(monitor.createTime, 'yyyy-MM-dd')}" style="vertical-align: middle;font-weight:400"></th>
                                     <th th:text="${monitor.isUsing}" style="vertical-align: middle;font-weight:400"></th>
-                                    <th><a href="#">启动</a></th>
+                                    <th><a th:href="@{'/doMonitor?id='+${monitor.id}}">启动</a> / <a th:href="@{'/undoMonitor?id='+${monitor.id}}">关闭</a></th>
                                 </tr>
                                 </tbody>
                             </table>

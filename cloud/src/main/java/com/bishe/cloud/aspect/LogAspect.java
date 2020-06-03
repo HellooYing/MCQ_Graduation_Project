@@ -1,5 +1,7 @@
 package com.bishe.cloud.aspect;
 
+import com.alibaba.fastjson.JSON;
+import com.bishe.cloud.util.CloudUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,8 +23,8 @@ public class LogAspect {
         StringBuilder sb = new StringBuilder();
         sb.append(joinPoint.toString());
         for (Object arg : joinPoint.getArgs()) {
-            sb.append(" arg:" + arg.toString() + "|");
+            sb.append(" arg:" +arg.toString() + "|");
         }
-        logger.info("before method: " + sb.toString());
+        logger.info("before method: " + JSON.toJSONString(sb));
     }
 }

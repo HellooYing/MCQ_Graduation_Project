@@ -97,4 +97,8 @@ public interface ResponseService {
     List<ResponseDevice> getAllDevice();
 
     List<ResponseRecord> getAllRecord();
+
+    String doResponseDevice(Long id);
+
+    String getUrl(Long id);
 }

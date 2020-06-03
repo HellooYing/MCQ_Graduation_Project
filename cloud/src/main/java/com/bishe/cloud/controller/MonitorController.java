@@ -38,41 +38,47 @@ public class MonitorController {
     SensorService sensorService;
 
     @RequestMapping(path = {"/undoMonitor"}, method = {RequestMethod.GET, RequestMethod.POST})
-    @ResponseBody
-    public String undoMonitor(@RequestParam("id") Long id) {
+    public String undoMonitor(Model model,@RequestParam("id") Long id) {
         try {
             if (!monitorService.getMonitor(id).getIsUsing()) {
-                return "closed";
+                model.addAttribute("status","undoMonitor-closed");
+                model.addAttribute("monitors",monitorService.getAll());
+                return "getMonitor";
             }
             if (!monitorService.undoMonitor(id)) {
-                return "failed";
+                model.addAttribute("status","undoMonitor-failed");
             }
             else{
-                return "ok";
+                model.addAttribute("status","undoMonitor-ok");
             }
         } catch (Exception e) {
             logger.error("关闭监控任务错误" + e.getMessage());
-            return "failed";
+            model.addAttribute("status","undoMonitor-failed");
         }
+        model.addAttribute("monitors",monitorService.getAll());
+        return "getMonitor";
     }
 
     @RequestMapping(path = {"/doMonitor"}, method = {RequestMethod.GET, RequestMethod.POST})
-    @ResponseBody
-    public String doMonitor(@RequestParam("id") Long id) {
+    public String doMonitor(Model model,@RequestParam("id") Long id) {
         try {
             if (monitorService.getMonitor(id).getIsUsing()) {
-                return "doing";
+                model.addAttribute("status","doMonitor-doing");
+                model.addAttribute("monitors",monitorService.getAll());
+                return "getMonitor";
             }
             if (!monitorService.doMonitor(id)) {
-                return "failed";
+                model.addAttribute("status","doMonitor-failed");
             }
             else{
-                return "ok";
+                model.addAttribute("status","doMonitor-ok");
             }
         } catch (Exception e) {
             logger.error("启动监控任务错误" + e.getMessage());
-            return "failed";
+            model.addAttribute("status","doMonitor-failed");
         }
+        model.addAttribute("monitors",monitorService.getAll());
+        return "getMonitor";
     }
 
     @RequestMapping(path = {"/deleteMonitor"}, method = {RequestMethod.GET, RequestMethod.POST})
@@ -118,6 +124,8 @@ public class MonitorController {
         try {
             Monitor monitor = new Monitor(sensorId, responseDeviceList, time, emails, sync_num, false,abnormal);
             monitorService.addMonitor(monitor);
+            System.out.println("http://"+monitorService.getUrl(monitor.getId()) + "/addMonitor");
+            System.out.println(monitorService.toMap(monitor));
             String result = CloudUtil.sendPost("http://"+monitorService.getUrl(monitor.getId()) + "/addMonitor", monitorService.toMap(monitor));
             if (result.equals("ok")) {
                 // 调用成功，状态码1
@@ -141,6 +149,7 @@ public class MonitorController {
     @ResponseBody
     public String submit(@RequestParam("data") String[] data) {
         try {
+            System.out.println(data[0]);
             List<SensorDataRecord> list=new ArrayList<>();
             SensorDataRecord t=JSON.parseObject(data[0],SensorDataRecord.class);
             Sensor sensor=sensorService.getSensor(t.getSensorId());

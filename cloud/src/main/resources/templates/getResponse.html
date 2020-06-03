@@ -106,6 +106,20 @@
             <div class="row">
 
                 <div class="col-md-12">
+                    <div th:if=" ${status} =='doResponseDevice-ok'" class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                        <span class="badge badge-pill badge-success">Success</span>
+                        测试响应设备成功
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:if=" ${status} =='doResponseDevice-failed'" class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                        <span class="badge badge-pill badge-danger">Failed</span>
+                        测试响应设备失败
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">响应设备管理</strong>
@@ -119,6 +133,7 @@
                                     <th style="vertical-align: middle;padding-right: 22px">归属仓库</th>
                                     <th style="vertical-align: middle;padding-right: 22px">边缘设备</th>
                                     <th style="vertical-align: middle;padding-right: 22px">坐标</th>
+                                    <th style="vertical-align: middle;padding-right: 22px">测试设备</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -128,6 +143,7 @@
                                     <td th:text="${response.warehouseId}+'s'" style="vertical-align: middle;font-weight:400"></td>
                                     <th th:text="${response.piId}" style="vertical-align: middle;font-weight:400"></th>
                                     <th th:text="${response.location}" style="vertical-align: middle;font-weight:400"></th>
+                                    <th><a th:href="@{'/doResponseDevice?id='+${response.id}}">启动</a></th>
                                 </tr>
                                 </tbody>
                             </table>

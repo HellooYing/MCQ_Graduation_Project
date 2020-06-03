@@ -1,6 +1,8 @@
 package com.bishe.cloud.util;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bishe.cloud.model.SensorDataRecord;
 import org.apache.http.HttpEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +27,11 @@ import org.apache.http.util.EntityUtils;
 
 
 public class CloudUtil {
+    public static void main(String[] args) {
+        String s="{\"id\":240,\"sensorId\":17,\"value\":1,\"normal\":0,\"createTime\":\"2020-06-03 00:44:58\"}";
+        SensorDataRecord a=JSON.parseObject(s, SensorDataRecord.class);
+        System.out.println(JSON.toJSONString(a));
+    }
     private static final Logger logger = LoggerFactory.getLogger(CloudUtil.class);
     private static final CloseableHttpClient httpclient = HttpClients.createDefault();
 

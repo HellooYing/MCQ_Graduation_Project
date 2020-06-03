@@ -49,4 +49,8 @@ public interface SensorService {
     SensorType getSensorTypeByName(String name);
 
     int insertSensorDataRecord(List<SensorDataRecord> list);
+
+    String doSensor(Long id);
+
+    String getUrl(Long id);
 }

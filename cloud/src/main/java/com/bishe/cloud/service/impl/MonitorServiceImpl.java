@@ -22,8 +22,6 @@ import java.util.Map;
 public class MonitorServiceImpl implements MonitorService {
     @Resource
     MonitorDAO monitorDAO;
-    @Resource
-    MonitorService monitorService;
 
     @Override
     public int addMonitor(Monitor monitor) {
@@ -54,7 +52,7 @@ public class MonitorServiceImpl implements MonitorService {
     public boolean doMonitor(Long id) {
         Map<String,String> map=new HashMap<>();
         map.put("id",id.toString());
-        String result = CloudUtil.sendPost("http://"+monitorService.getUrl(id) + "/doMonitor", map);
+        String result = CloudUtil.sendPost("http://"+getUrl(id) + "/doMonitor", map);
         if (result.equals("ok")) {
             Monitor monitor=getMonitor(id);
             monitor.setIsUsing(true);
@@ -69,7 +67,7 @@ public class MonitorServiceImpl implements MonitorService {
     public boolean undoMonitor(Long id) {
         Map<String,String> map=new HashMap<>();
         map.put("id",id.toString());
-        String result = CloudUtil.sendPost("http://"+monitorService.getUrl(id) + "/undoMonitor", map);
+        String result = CloudUtil.sendPost("http://"+getUrl(id) + "/undoMonitor", map);
         if (result.equals("ok")) {
             Monitor monitor=getMonitor(id);
             monitor.setIsUsing(false);
@@ -95,6 +93,6 @@ public class MonitorServiceImpl implements MonitorService {
 
     @Override
     public String getUrl(Long id) {
-        return monitorDAO.getUrl(id);
+        return monitorDAO.getUrl(id)+":8000";
     }
 }

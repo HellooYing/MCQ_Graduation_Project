@@ -7,10 +7,13 @@ import com.bishe.cloud.model.ResponseDevice;
 import com.bishe.cloud.model.ResponseDeviceType;
 import com.bishe.cloud.model.ResponseRecord;
 import com.bishe.cloud.service.ResponseService;
+import com.bishe.cloud.util.CloudUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description:
@@ -98,5 +101,19 @@ public class ResponseServiceImpl implements ResponseService {
     @Override
     public List<ResponseRecord> getAllRecord() {
         return responseRecordDAO.selectAll();
+    }
+
+    @Override
+    public String doResponseDevice(Long id) {
+        Map<String,String> map=new HashMap<>();
+        map.put("id",id.toString());
+        System.out.println("http://"+getUrl(id) + "/doResponseDevice");
+        String result = CloudUtil.sendPost("http://"+getUrl(id) + "/doResponseDevice", map);
+        return result;
+    }
+
+    @Override
+    public String getUrl(Long id) {
+        return responseDeviceDAO.getUrl(id)+":8000";
     }
 }

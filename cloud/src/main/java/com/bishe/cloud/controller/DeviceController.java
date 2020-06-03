@@ -4,6 +4,7 @@ import com.bishe.cloud.model.*;
 import com.bishe.cloud.service.PiService;
 import com.bishe.cloud.service.ResponseService;
 import com.bishe.cloud.service.SensorService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -344,5 +345,40 @@ public class DeviceController {
         return "ok";
     }
 
+    @RequestMapping(path = {"/doSensor"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String doSensor(Model model,@RequestParam("id") Long id) {
+        try {
+            String value=sensorService.doSensor(id);
+            if (StringUtils.isEmpty(value)) {
+                model.addAttribute("status","doSensor-failed");
+            }
+            else{
+                model.addAttribute("status","doSensor-ok");
+            }
+            model.addAttribute("value",value);
+        } catch (Exception e) {
+            logger.error("测试传感器执行失败" + e.getMessage());
+            model.addAttribute("status","doSensor-failed");
+        }
+        model.addAttribute("sensors",sensorService.getAllSensor());
+        return "getSensor";
+    }
 
+    @RequestMapping(path = {"/doResponseDevice"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String doResponseDevice(Model model,@RequestParam("id") Long id) {
+        try {
+            String result=responseService.doResponseDevice(id);
+            if (result.equals("failed")) {
+                model.addAttribute("status","doResponseDevice-failed");
+            }
+            else{
+                model.addAttribute("status","doResponseDevice-ok");
+            }
+        } catch (Exception e) {
+            logger.error("测试响应设备执行失败" + e.getMessage());
+            model.addAttribute("status","doMonitor-failed");
+        }
+        model.addAttribute("responses",responseService.getAllDevice());
+        return "getResponse";
+    }
 }

@@ -3,14 +3,18 @@ package com.bishe.cloud.service.impl;
 import com.bishe.cloud.dao.SensorDAO;
 import com.bishe.cloud.dao.SensorDataRecordDAO;
 import com.bishe.cloud.dao.SensorTypeDAO;
+import com.bishe.cloud.model.Monitor;
 import com.bishe.cloud.model.Sensor;
 import com.bishe.cloud.model.SensorDataRecord;
 import com.bishe.cloud.model.SensorType;
 import com.bishe.cloud.service.SensorService;
+import com.bishe.cloud.util.CloudUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 传感器相关服务
@@ -114,5 +118,22 @@ public class SensorServiceImpl implements SensorService{
     @Override
     public int insertSensorDataRecord(List<SensorDataRecord> list) {
         return sensorDataRecordDAO.insertList(list);
+    }
+
+    @Override
+    public String doSensor(Long id) {
+        Map<String,String> map=new HashMap<>();
+        map.put("id",id.toString());
+        String result = CloudUtil.sendPost("http://"+getUrl(id) + "/doSensor", map);
+        if (result.equals("failed")) {
+            return "";
+        } else {
+            return result;
+        }
+    }
+
+    @Override
+    public String getUrl(Long id) {
+        return sensorDAO.getUrl(id)+":8000";
     }
 }
